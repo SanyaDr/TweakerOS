@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TweakerWin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+615fb98bfb74f92e90a6bba6b4ea2e20b4f76af1")]
 [assembly: System.Reflection.AssemblyProductAttribute("TweakerWin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TweakerWin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
