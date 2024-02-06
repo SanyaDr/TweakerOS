@@ -58,12 +58,15 @@
             </Grid.RowDefinitions>
 
             <!-- CATEGORIES -->
-            <StackPanel x:Name="CategoriesStackPanel" Grid.Row="0" Grid.Column="0">
+            <StackPanel Grid.Row="0" Grid.Column="0">
                 <Button x:Name="HomePageButton" Style="{StaticResource CategoryButtonStyle}"
                         Click="HomePageButton_OnClick">
                     <Label Style="{StaticResource CategoryButtonLabelsStyle}">Главная</Label>
                 </Button>
                 <Separator Background="Black" Height="2" Margin="10 3" />
+                <StackPanel x:Name="CategoriesStackPanel">
+
+                </StackPanel>
                 <!-- <Button Style="{StaticResource CategoryButtonStyle}"> -->
                 <!--     <Label Style="{StaticResource CategoryButtonLabelsStyle}">Восстановление</Label> -->
                 <!-- </Button> -->

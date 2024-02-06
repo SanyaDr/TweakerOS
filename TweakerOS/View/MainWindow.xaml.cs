@@ -8,6 +8,8 @@ namespace TweakerOS.View;
 
 public partial class MainWindow : Window
 {
+    private List<ICategory> _categories = new();
+
     public MainWindow()
     {
         InitializeComponent();
@@ -16,13 +18,26 @@ public partial class MainWindow : Window
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        ReadCategoties();
+        _categories.Add(new HomePageCategory());
+        _categories.Add(new ViewTweaksCategory());
+        LoadButtons(_categories);
     }
 
-    private void ReadCategoties()
+    private void LoadButtons(List<ICategory> categories)
     {
-        List<ICategory> categories = new();
-        categories.Add(new HomePageCategory());
+        CategoriesStackPanel.Children.Clear();
+        for (int i = 1; i < categories.Count; i++)
+        {
+            Button btn = new();
+            btn.Style = (Style)FindResource("CategoryButtonStyle");
+            Label label = new();
+            label.Content = categories[i].Name;
+            label.Style = (Style)FindResource("CategoryButtonLabelsStyle");
+            btn.Name = $"Category{i}";
+            btn.Content = label;
+            btn.Click += CategoryButton_OnClick;
+            CategoriesStackPanel.Children.Add(btn);
+        }
     }
 
     private void ShowTweaks(ICategory category)
@@ -42,7 +57,7 @@ public partial class MainWindow : Window
             Label label = new();
             label.Style = (Style)FindResource("TweakNameLabelStyle");
             label.Content = tweak.Name;
-            
+
             DockPanel dpanel = new();
             dpanel.Style = (Style)FindResource("TweakDockPanelStyle");
             DockPanel.SetDock(chkbox, Dock.Left);
@@ -61,4 +76,12 @@ public partial class MainWindow : Window
         // TweaksStackPanel
         ShowTweaks(new HomePageCategory());
     }
+
+    private void CategoryButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        // MessageBox.Show("Нажата кнопка категории!", ((Button)sender).Content.ToString());
+        int ind = int.Parse(((Button)sender).Name.Split("Category")[1]);
+        ShowTweaks(_categories[ind]);
+    }
+    
 }
