@@ -43,7 +43,13 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="TweakStackPanelStyle" TargetType="DockPanel">
+    <Style x:Key="TweakBorderStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="2"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Margin" Value="10"/>
+    </Style>
+    <Style x:Key="TweakDockPanelStyle" TargetType="DockPanel">
         <Setter Property="Background" Value="#cccccc" />
         <!-- <Setter Property="Margin" Value="10" /> -->
         <!-- <Setter Property="Height" Value=""></Setter> -->
