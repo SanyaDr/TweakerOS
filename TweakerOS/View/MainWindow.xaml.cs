@@ -8,21 +8,27 @@ namespace TweakerOS.View;
 
 public partial class MainWindow : Window
 {
+    // Список категорий для отображения на экране 
     private List<ICategory> _categories = new();
 
     public MainWindow()
     {
         InitializeComponent();
+        //после запуска добавляем категории в список
         Loaded += OnLoaded;
     }
 
+    // добавление категорий
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
+// TODO а нужен ли homepage в списке категорий?
         _categories.Add(new HomePageCategory());
         _categories.Add(new ViewTweaksCategory());
         LoadButtons(_categories);
     }
 
+    // отрисовка кнопок категорий на экран
+    // TODO переименовать методы в более понятные
     private void LoadButtons(List<ICategory> categories)
     {
         CategoriesStackPanel.Children.Clear();
@@ -40,6 +46,7 @@ public partial class MainWindow : Window
         }
     }
 
+    // отрисовка твиков выбранной категории 
     private void ShowTweaks(ICategory category)
     {
         TweaksStackPanel.Children.Clear();
@@ -71,12 +78,16 @@ public partial class MainWindow : Window
         }
     }
 
+    
+    // обработка нажатия на кнопку домашней страницы
+    // TODO объединить с методом CategoryButton_OnClick
     private void HomePageButton_OnClick(object sender, RoutedEventArgs e)
     {
         // TweaksStackPanel
         ShowTweaks(new HomePageCategory());
     }
 
+    // обработка нажатия выбора категории
     private void CategoryButton_OnClick(object sender, RoutedEventArgs e)
     {
         // MessageBox.Show("Нажата кнопка категории!", ((Button)sender).Content.ToString());
