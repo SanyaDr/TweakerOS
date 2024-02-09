@@ -1,5 +1,4 @@
 using TweakerOS.Interfaces;
-using TweakerOS.Model;
 
 namespace TweakerOS.Tweaks;
 

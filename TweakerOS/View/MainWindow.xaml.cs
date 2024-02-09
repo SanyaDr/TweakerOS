@@ -2,7 +2,6 @@ using System.Windows;
 using System.Windows.Controls;
 using TweakerOS.Controllers;
 using TweakerOS.Interfaces;
-using TweakerOS.Model;
 
 namespace TweakerOS.View;
 
@@ -18,21 +17,24 @@ public partial class MainWindow : Window
         Loaded += OnLoaded;
     }
 
-    // добавление категорий
+    /// <summary>
+    /// Операции после запуска приложения. Выполняет загрузку категорий твиков и вызов домашней страницы
+    /// </summary>
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-// TODO а нужен ли homepage в списке категорий?
-        _categories.Add(new HomePageCategory());
         _categories.Add(new ViewTweaksCategory());
-        LoadButtons(_categories);
+        ShowAllCategoryButtons(_categories);
+        HomePageButton_OnClick(sender, e);
     }
 
-    // отрисовка кнопок категорий на экран
-    // TODO переименовать методы в более понятные
-    private void LoadButtons(List<ICategory> categories)
+    /// <summary>
+    /// Отрисовка всех категорий на экран
+    /// </summary>
+    /// <param name="categories">Список категорий</param>
+    private void ShowAllCategoryButtons(List<ICategory> categories)
     {
         CategoriesStackPanel.Children.Clear();
-        for (int i = 1; i < categories.Count; i++)
+        for (int i = 0; i < categories.Count; i++)
         {
             Button btn = new();
             btn.Style = (Style)FindResource("CategoryButtonStyle");
@@ -46,8 +48,11 @@ public partial class MainWindow : Window
         }
     }
 
-    // отрисовка твиков выбранной категории 
-    private void ShowTweaks(ICategory category)
+    /// <summary>
+    /// Отрисовка всех твиков выбранной категории
+    /// </summary>
+    /// <param name="category">Выбранная категория</param>
+    private void ShowTweaksBySelectedCategory(ICategory category)
     {
         TweaksStackPanel.Children.Clear();
         foreach (var tweak in category.Tweaks)
@@ -78,21 +83,22 @@ public partial class MainWindow : Window
         }
     }
 
-    
+
     // обработка нажатия на кнопку домашней страницы
-    // TODO объединить с методом CategoryButton_OnClick
+    /// <summary>
+    /// Обработка нажатия на кнопку домашней страницы
+    /// </summary>
     private void HomePageButton_OnClick(object sender, RoutedEventArgs e)
     {
-        // TweaksStackPanel
-        ShowTweaks(new HomePageCategory());
+        ShowTweaksBySelectedCategory(new HomePageCategory());
     }
 
-    // обработка нажатия выбора категории
+    /// <summary>
+    /// Обработка нажатия на кнопку категории твиков
+    /// </summary>
     private void CategoryButton_OnClick(object sender, RoutedEventArgs e)
     {
-        // MessageBox.Show("Нажата кнопка категории!", ((Button)sender).Content.ToString());
-        int ind = int.Parse(((Button)sender).Name.Split("Category")[1]);
-        ShowTweaks(_categories[ind]);
+        int index = int.Parse(((Button)sender).Name.Split("Category")[1]);
+        ShowTweaksBySelectedCategory(_categories[index]);
     }
-    
 }
