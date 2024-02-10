@@ -201,3 +201,9 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 /.vs
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages

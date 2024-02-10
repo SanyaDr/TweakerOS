@@ -17,15 +17,19 @@ namespace TweakerWin
     /// </summary>
     public partial class MainWindow : Window
     {
-        Tweak1 Tweak1 = new Tweak1();
+        PerformanceTweaks Tweak1 = new PerformanceTweaks();
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_Enable(object sender, RoutedEventArgs e)
         {
-            Tweak1.Action();
+            Tweak1.Enable();
+        }
+        private void Button_Click_Disable(object sender, RoutedEventArgs e)
+        {
+            Tweak1.Disable();
         }
     }
 }

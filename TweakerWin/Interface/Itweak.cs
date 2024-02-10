@@ -8,6 +8,7 @@ namespace TweakerWin.Interface
 {
     internal interface Itweak
     {
-        public void Action();
+        public void Enable();
+        public void Disable();
     }
 }
