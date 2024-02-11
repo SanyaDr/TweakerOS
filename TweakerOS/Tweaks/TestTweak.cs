@@ -22,9 +22,5 @@ public class TestTweak : ITweak
     {
         throw new NotImplementedException();
     }
-
-    public void Action()
-    {
-        //...
-    }
+    
 }

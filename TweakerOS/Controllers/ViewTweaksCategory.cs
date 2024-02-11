@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using TweakerOS.Interfaces;
 using TweakerOS.Tweaks;
+using TweakerOS.Tweaks.Visual;
 
 namespace TweakerOS.Controllers;
 
@@ -14,6 +15,7 @@ public class ViewTweaksCategory : ICategory
         get
         {
             Collection<ITweak> tweaks = new();
+            tweaks.Add(new ContextCopyToMoveTo());
             tweaks.Add(new TestTweakView());
             tweaks.Add(new TestTweakView());
             return tweaks.AsReadOnly();
