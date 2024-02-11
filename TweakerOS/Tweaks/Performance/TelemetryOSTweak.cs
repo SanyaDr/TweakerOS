@@ -6,6 +6,11 @@ namespace TweakerWin.Tweaks
 {
     internal class TelemetryOSTweak : ITweak
     {
+        public bool GetIsChanged()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Включение твика
         /// </summary>

@@ -10,6 +10,11 @@ namespace TweakerWin.Tweaks
 
     internal class PerformanceTweaks : ITweak
     {
+        public bool GetIsChanged()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Включение твика
         /// </summary>
