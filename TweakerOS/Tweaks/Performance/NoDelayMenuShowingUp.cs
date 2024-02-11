@@ -9,9 +9,9 @@ namespace TweakerOS.Tweaks.Performance
     /// </summary>
     internal class NoDelayMenuShowingUp : ITweak
     {
-        public string Name => "Отключить задержку отображения меню";
+        public string Name => "Отобразить все значки в панели задач";
 
-        public string Description => "Убирает задержку при отображении меню.";
+        public string Description => "Отображает скрытые значки в панели задач в правом нижнем углу.";
 
         public void Disable()
         {

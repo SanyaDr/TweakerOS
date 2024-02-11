@@ -14,12 +14,19 @@ namespace TweakerWin.Tweaks
         /// <summary>
         /// Включение твика
         /// </summary>
-        public void Enable()
+        /// 
+
+        private void StopServices()
         {
             Utilities.StopService("DiagTrack");
             Utilities.StopService("diagnosticshub.standardcollector.service");
             Utilities.StopService("dmwappushservice");
             Utilities.StopService("DcpSvc");
+        }
+
+        public void Enable()
+        {
+            StopServices();
 
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack", "Start", "4", RegistryValueKind.DWord);
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4", RegistryValueKind.DWord);
