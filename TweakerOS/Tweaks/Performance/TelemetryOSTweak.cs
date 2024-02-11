@@ -1,10 +1,10 @@
 ﻿using Microsoft.Win32;
-using TweakerWin.Interface;
+using TweakerOS.Interfaces;
 using TweakerWin.TweakHelper;
 
 namespace TweakerWin.Tweaks
 {
-    internal class TelemetryOSTweak : Itweak
+    internal class TelemetryOSTweak : ITweak
     {
         /// <summary>
         /// Включение твика
@@ -478,6 +478,13 @@ namespace TweakerWin.Tweaks
 
             Utilities.RunCommand("schtasks.exe /change /enable /tn \"\\Mozilla\\Firefox Default Browser Agent 308046B0AF4A39CB\"");
             Utilities.RunCommand("schtasks.exe /change /enable /tn \"\\Mozilla\\Firefox Default Browser Agent D2CEEC440E2074BD\"");
+        }
+
+        public string Name { get; }
+        public string Description { get; }
+        public void Action()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using Microsoft.Win32;
 using System.Diagnostics;
 using System.Windows;
-using TweakerWin.Interface;
+using TweakerOS.Interfaces;
 using TweakerWin.TweakHelper;
 
 
 namespace TweakerWin.Tweaks
 {
 
-    internal class PerformanceTweaks : Itweak
+    internal class PerformanceTweaks : ITweak
     {
         /// <summary>
         /// Включение твика
@@ -316,5 +316,11 @@ namespace TweakerWin.Tweaks
         }
 
 
+        public string Name { get; }
+        public string Description { get; }
+        public void Action()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
