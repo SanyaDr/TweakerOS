@@ -32,7 +32,6 @@ fabric.properties
 *.suo
 *.user
 *.userosscache
-*.sln.docstates
 *.userprefs
 mono_crash.*
 [Dd]ebug/
@@ -239,5 +238,4 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
-*.sln.iml
 coverage*[.json, .xml, .info]
