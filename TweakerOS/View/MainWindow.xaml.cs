@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using TweakerOS.Controllers;
+using TweakerOS.Controllers.TweakCategories;
 using TweakerOS.Interfaces;
 
 namespace TweakerOS.View;
@@ -22,7 +23,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        _categories.Add(new ViewTweaksCategory());
+        _categories = AllCategories.GetCategories();
         ShowAllCategoryButtons(_categories);
         HomePageButton_OnClick(sender, e);
     }

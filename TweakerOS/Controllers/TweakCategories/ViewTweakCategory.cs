@@ -3,9 +3,9 @@ using TweakerOS.Interfaces;
 using TweakerOS.Tweaks;
 using TweakerOS.Tweaks.Visual;
 
-namespace TweakerOS.Controllers;
+namespace TweakerOS.Controllers.TweakCategories;
 
-public class ViewTweaksCategory : ICategory
+public class ViewTweakCategory : ICategory
 {
     public string Name => "Вид";
     public string Description => "Настройте вид вашей системы по вашему желанию";

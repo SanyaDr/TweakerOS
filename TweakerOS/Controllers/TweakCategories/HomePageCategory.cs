@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using TweakerOS.Interfaces;
 using TweakerOS.Tweaks;
 
-namespace TweakerOS.Controllers;
+namespace TweakerOS.Controllers.TweakCategories;
 
 public class HomePageCategory: ICategory
 {
