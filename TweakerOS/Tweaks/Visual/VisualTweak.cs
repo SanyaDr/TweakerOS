@@ -201,6 +201,8 @@ namespace TweakerWin.Tweaks
 
             Registry.SetValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "Hilight", rgbValue, RegistryValueKind.String);
             Registry.SetValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "HotTrackingColor", rgbValue, RegistryValueKind.String);
+            Registry.SetValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "ActiveBorder", rgbValue, RegistryValueKind.String);
+            Registry.SetValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "HilightText", rgbValue, RegistryValueKind.String);
 
         }
 

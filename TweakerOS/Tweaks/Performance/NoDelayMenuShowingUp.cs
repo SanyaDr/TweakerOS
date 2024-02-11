@@ -1,0 +1,41 @@
+﻿using Microsoft.Win32;
+using TweakerOS.Interfaces;
+using TweakerWin.TweakHelper;
+
+namespace TweakerOS.Tweaks.Performance
+{
+    /// <summary>
+    /// // Убирает задержку при отображении меню.
+    /// </summary>
+    internal class NoDelayMenuShowingUp : ITweak
+    {
+        public string Name => "Отключить задержку отображения меню";
+
+        public string Description => "Убирает задержку при отображении меню.";
+
+        public void Disable()
+        {
+            Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\Explorer", "EnableAutoTray");
+        }
+
+        public void Enable()
+        {
+            Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer", "EnableAutoTray", 0, RegistryValueKind.DWord);
+        }
+
+        public bool GetIsChanged()
+        {
+            object registryValue = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer", "EnableAutoTray", null);
+            if (registryValue != null && (int)registryValue == 0)
+            {
+                // Значение в реестре соответствует ожидаемому значению.
+                return false;
+            }
+            else
+            {
+                // Значение в реестре отличается от ожидаемого.
+                return true;
+            }
+        }
+    }
+}
