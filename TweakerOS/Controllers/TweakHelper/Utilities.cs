@@ -16,6 +16,14 @@ namespace TweakerWin.TweakHelper
             return Array.Exists(ServiceController.GetServices(), (serviceController => serviceController.ServiceName.Equals(serviceName)));
         }
 
+        internal static bool IsServiceRunning(string serviceName)
+        {
+            using (ServiceController sc = new ServiceController(serviceName))
+            {
+                return sc.Status == ServiceControllerStatus.Running;
+            }
+        }
+
         internal static void StopService(string serviceName)
         {
             if (ServiceExists(serviceName))
