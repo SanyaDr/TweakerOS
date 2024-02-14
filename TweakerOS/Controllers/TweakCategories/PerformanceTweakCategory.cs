@@ -1,9 +1,9 @@
 using System.Collections.ObjectModel;
+using System.Windows.Automation;
 using TweakerOS.Interfaces;
 using TweakerOS.Tweaks;
 using TweakerOS.Tweaks.Performance;
 using TweakerOS.Tweaks.SystemServices;
-using TweakerWin.Tweaks;
 
 namespace TweakerOS.Controllers.TweakCategories;
 
@@ -33,7 +33,13 @@ public class PerformanceTweakCategory:ICategory
             tweaks.Add( new  ServiceTweaksStoped());
             tweaks.Add( new  Superfetch());
             tweaks.Add( new  SystemRestore());
-            tweaks.Add( new  TelemetryOSTweak());
+            tweaks.Add(new AllTelemetryOS());
+            tweaks.Add(new ChromeTelemetry());
+            tweaks.Add(new EdgeTelemetry());
+            tweaks.Add(new FirefoxTelemetry());
+            tweaks.Add(new GameBar());
+            tweaks.Add(new NvidiaTelemetry());
+            tweaks.Add(new VisualStudioTelemetry());
             return tweaks.AsReadOnly();
         }
     }}
