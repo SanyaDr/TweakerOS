@@ -16,8 +16,6 @@ public class ViewTweakCategory : ICategory
         {
             Collection<ITweak> tweaks = new();
             tweaks.Add(new ContextCopyToMoveTo());
-            tweaks.Add(new TestTweakView());
-            tweaks.Add(new TestTweakView());
             return tweaks.AsReadOnly();
         }
     }

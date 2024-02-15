@@ -14,8 +14,7 @@ public class HomePageCategory: ICategory
         get
         {
             Collection<ITweak> tweaks = new();
-            tweaks.Add(new TestTweak());
-            tweaks.Add(new TestTweak());
+
             return tweaks.AsReadOnly();
         }
     }

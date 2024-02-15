@@ -1,0 +1,73 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+
+    <!-- Start: Logo Content -->
+    <Style x:Key="LogoIconStyle" TargetType="Image">
+        <Setter Property="Margin" Value="16 0 0 0" />
+        <Setter Property="Stretch" Value="Fill" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="LogoLabelStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBlueColor}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="Margin" Value="16 0 0 0" />
+    </Style>
+    <!-- End: Logo Content -->
+
+    <!-- Left Menu -->
+    <Style x:Key="LeftMenuButtonStyle" TargetType="ToggleButton">
+        <Setter Property="Width" Value="30" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="16 0 0 0" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                        <Viewbox Height="20" Width="20" Margin="0 6 0 0 "
+                                 Stretch="UniformToFill">
+                            <Canvas Height="512" Width="512">
+                                <Path x:Name="menuIcon1"
+                                      Data="m32 0h448c17.671875 0 32 14.328125 32 32s-14.328125 32-32 32h-448c-17.671875 0-32-14.328125-32-32s14.328125-32 32-32zm0 0"
+                                      Fill="{DynamicResource PrimaryGrayColor}" Margin="0 0 0 0" />
+                                <Path x:Name="menuIcon2"
+                                      Data="m32 128h448c17.671875 0 32 14.328125 32 32s-14.328125 32-32 32h-448c-17.671875 0-32-14.328125-32-32s14.328125-32 32-32zm0 0"
+                                      Fill="{DynamicResource PrimaryGrayColor}" Margin="0 20 0 0" />
+                                <Path x:Name="menuIcon3"
+                                      Data="m32 256h448c17.671875 0 32 14.328125 32 32s-14.328125 32-32 32h-448c-17.671875 0-32-14.328125-32-32s14.328125-32 32-32zm0 0"
+                                      Fill="{DynamicResource PrimaryGrayColor}" Margin="0 40 0 0" />
+                            </Canvas>
+                        </Viewbox>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Fill" TargetName="menuIcon1" Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter Property="Fill" TargetName="menuIcon2" Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter Property="Fill" TargetName="menuIcon3" Value="{DynamicResource PrimaryBlueColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+    </Style>
+
+
+</ResourceDictionary>

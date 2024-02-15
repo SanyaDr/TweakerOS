@@ -1,9 +1,21 @@
 ﻿<Application x:Class="TweakerOS.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:TweakerOS"
-             StartupUri="./View/MainWindow.xaml">
+             StartupUri="./View/MainWindowTwo.xaml"
+             
+             >
     <Application.Resources>
-         
+         <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                 <!-- Icons -->
+                 <ResourceDictionary Source="/Resources/Icons/IconsSvg.xaml"/>
+
+                 <!-- Themes -->
+                 <ResourceDictionary Source="/Resources/Themes/LightTheme.xaml"/>
+                 
+                 <!-- Styles -->
+                 <ResourceDictionary Source="/Resources/MainDesign.xaml"/>
+             </ResourceDictionary.MergedDictionaries>
+         </ResourceDictionary>
     </Application.Resources>
 </Application>

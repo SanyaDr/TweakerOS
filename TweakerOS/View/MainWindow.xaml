@@ -3,16 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:TweakerOS.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="560" Width="910"
         MinWidth="910" MinHeight="560">
 
     <Window.Resources>
         <ResourceDictionary Source="/Resources/main.xaml" />
+        
     </Window.Resources>
 
     <DockPanel LastChildFill="True">
+
+
         <!-- HEADER -->
         <Grid DockPanel.Dock="Top" ShowGridLines="True">
             <Grid.ColumnDefinitions>
@@ -68,10 +70,15 @@
             </StackPanel>
 
             <!-- TWEAKS -->
-            <StackPanel x:Name="TweaksStackPanel" Grid.Row="0" Grid.Column="1">
+            <StackPanel Grid.Row="0" Grid.Column="1">
                 <Border Style="{StaticResource TweakBorderStyle}">
                     <DockPanel Style="{StaticResource TweakDockPanelStyle}" />
                 </Border>
+                
+                <ToggleButton />
+
+                <StackPanel x:Name="TweaksStackPanel" />
+
             </StackPanel>
         </Grid>
     </DockPanel>
