@@ -21,7 +21,7 @@
     </Style>
     <!-- End: Logo Content -->
 
-    <!-- Left Menu -->
+    <!-- Start: Show Left Menu Button -->
     <Style x:Key="LeftMenuButtonStyle" TargetType="ToggleButton">
         <Setter Property="Width" Value="30" />
         <Setter Property="Height" Value="30" />
@@ -65,9 +65,71 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-
     </Style>
+    <!-- End: Show Left Menu Button -->
 
+    <!-- Start: Menu RadioButtons -->
+    <Style x:Key="MenuRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryGrayColor}" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="MenuRadioButton" Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Selected  -->
+                            <Border x:Name="buttonSelected" Grid.ColumnSpan="2" CornerRadius="4" Width="210"
+                                    HorizontalAlignment="Right" />
+
+                            <!-- Indicator -->
+                            <Rectangle Name="Indicator" HorizontalAlignment="Left" Width="4" Height="40"
+                                       VerticalAlignment="Center" RadiusX="2" RadiusY="2" />
+
+                            <!-- Icon -->
+                            <Path x:Name="Icon"
+                                  Data="{Binding Tag, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}"
+                                  Height="24" Width="24" Stretch="None" Fill="{DynamicResource PrimaryGrayColor}"
+                                  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0" />
+
+                            <!-- Text -->
+                            <TextBlock x:Name="textName" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                       Margin="12 0 0 0"
+                                       Grid.Column="1" Text="{TemplateBinding Content}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       FontSize="{TemplateBinding FontSize}" />
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="textName" Property="Foreground"
+                                    Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource PrimaryBlueColor}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter TargetName="Indicator" Property="Height" Value="20" />
+                            <Setter TargetName="buttonSelected" Property="Background" Value="{DynamicResource SecondaryGrayColor}" />
+                            <Setter TargetName="textName" Property="Foreground" Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter TargetName="buttonSelected" Property="CornerRadius" Value="8"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- End: Menu RadioButton -->
 
 </ResourceDictionary>

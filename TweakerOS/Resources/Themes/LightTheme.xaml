@@ -9,6 +9,9 @@
     <!-- Object Colors -->
     <SolidColorBrush x:Key="PrimaryBlueColor" Color="DodgerBlue"/>
     <SolidColorBrush x:Key="PrimaryGrayColor" Color="#BFBFC4"/>
+    
+    <SolidColorBrush x:Key="SecondaryGrayColor" Color="#EEEEEE"/>
 
+    
     
 </ResourceDictionary>

@@ -18,7 +18,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- TODO Проверить закругление окна на квадратном windows -->
-            <!-- Left Control Panel -->
+            <!-- Start: Left Control Panel -->
             <Border CornerRadius="8 0 0 8"
                     Background="{DynamicResource SecondaryBackgroundColor}">
                 <Grid x:Name="LeftControlPanelGrid" Width="60">
@@ -35,7 +35,7 @@
                         <Label Style="{StaticResource LogoLabelStyle}" Content="TweakerOS" />
                     </StackPanel>
 
-                    <!-- Menu -->
+                    <!-- Start: Menu -->
                     <ToggleButton Grid.Row="0" Style="{StaticResource LeftMenuButtonStyle}">
 
                         <ToggleButton.Triggers>
@@ -61,6 +61,12 @@
                             </EventTrigger>
                         </ToggleButton.Triggers>
                     </ToggleButton>
+                    <StackPanel Grid.Row="3">
+                        <RadioButton x:Name="HomeRadioButton" IsChecked="True" Content="Главная"
+                                     Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource HomeMenuRb}" />
+                        <RadioButton x:Name="ViewRadioButton" Content="Внешний вид"
+                                     Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource viewMenuRb}" />
+                    </StackPanel>
 
 
                 </Grid>
