@@ -9,6 +9,7 @@ public class ViewTweakCategory : ICategory
 {
     public string Name => "Вид";
     public string Description => "Настройте вид вашей системы по вашему желанию";
+    public string SystemCodeName => "Home";
 
     public ReadOnlyCollection<ITweak> Tweaks
     {

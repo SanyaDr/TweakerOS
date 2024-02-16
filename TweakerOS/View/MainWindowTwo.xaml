@@ -19,7 +19,7 @@
 
             <!-- TODO Проверить закругление окна на квадратном windows -->
             <!-- Start: Left Control Panel -->
-            <Border CornerRadius="8 0 0 8"
+            <Border CornerRadius="8 10 10 8"
                     Background="{DynamicResource SecondaryBackgroundColor}">
                 <Grid x:Name="LeftControlPanelGrid" Width="60">
                     <Grid.RowDefinitions>
@@ -43,7 +43,7 @@
                                 <BeginStoryboard>
                                     <Storyboard x:Name="HideStackPanel">
                                         <DoubleAnimation Storyboard.TargetName="LeftControlPanelGrid"
-                                                         Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="200"
+                                                         Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="250"
                                                          To="60" Duration="0:0:0.3">
                                         </DoubleAnimation>
                                     </Storyboard>
@@ -54,22 +54,40 @@
                                     <Storyboard x:Name="ShowStackPanel">
                                         <DoubleAnimation Storyboard.TargetName="LeftControlPanelGrid"
                                                          Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="60"
-                                                         To="200" Duration="0:0:0.3">
+                                                         To="250" Duration="0:0:0.3">
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger>
                         </ToggleButton.Triggers>
                     </ToggleButton>
-                    <StackPanel Grid.Row="3">
+                    <StackPanel Grid.Row="3" x:Name="MenuButtons">
                         <RadioButton x:Name="HomeRadioButton" IsChecked="True" Content="Главная"
-                                     Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource HomeMenuRb}" />
-                        <RadioButton x:Name="ViewRadioButton" Content="Внешний вид"
-                                     Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource viewMenuRb}" />
+                                     Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource HomeMenuRb}"
+                                     Click="CategoryClick" />
+                    </StackPanel>
+                    <!-- End: Menu -->
+
+                    <StackPanel Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                Width="250" Margin="0 0 10 25">
+
+                        <Label Content="TweakerOS" Style="{DynamicResource MenuAboutProgramLabelStyle}"
+                               Foreground="{DynamicResource TextPrimaryColor}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Версия 0.2 x64" Style="{DynamicResource MenuAboutProgramLabelStyle}"
+                                   FontWeight="Regular" Margin="0 0 -10 0" FontSize="12" />
+                            <!-- TODO Добавить ссылку на окно "О программе"-->
+                            <Label Content=" - О программе" Style="{DynamicResource MenuAboutProgramLabelStyle}"
+                                   FontWeight="Regular" FontSize="12" Margin="0 0 -15 0" />
+                        </StackPanel>
+
+
                     </StackPanel>
 
 
                 </Grid>
+
+
             </Border>
 
         </Grid>

@@ -70,7 +70,7 @@
 
     <!-- Start: Menu RadioButtons -->
     <Style x:Key="MenuRadioButtonStyle" TargetType="RadioButton">
-        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource PrimaryGrayColor}" />
         <Setter Property="FontWeight" Value="Normal" />
@@ -88,7 +88,7 @@
                             </Grid.ColumnDefinitions>
 
                             <!-- Selected  -->
-                            <Border x:Name="buttonSelected" Grid.ColumnSpan="2" CornerRadius="4" Width="210"
+                            <Border x:Name="buttonSelected" Grid.ColumnSpan="2" CornerRadius="4" Width="260"
                                     HorizontalAlignment="Right" />
 
                             <!-- Indicator -->
@@ -121,9 +121,11 @@
                             <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource PrimaryBlueColor}" />
                             <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource PrimaryBlueColor}" />
                             <Setter TargetName="Indicator" Property="Height" Value="20" />
-                            <Setter TargetName="buttonSelected" Property="Background" Value="{DynamicResource SecondaryGrayColor}" />
-                            <Setter TargetName="textName" Property="Foreground" Value="{DynamicResource PrimaryBlueColor}" />
-                            <Setter TargetName="buttonSelected" Property="CornerRadius" Value="8"/>
+                            <Setter TargetName="buttonSelected" Property="Background"
+                                    Value="{DynamicResource SecondaryGrayColor}" />
+                            <Setter TargetName="textName" Property="Foreground"
+                                    Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter TargetName="buttonSelected" Property="CornerRadius" Value="8" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -131,5 +133,14 @@
         </Setter>
     </Style>
     <!-- End: Menu RadioButton -->
+
+    <!-- Start: Left Menu Program Info -->
+    <Style x:Key="MenuAboutProgramLabelStyle" TargetType="Label">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0 0 25 0"/>
+    </Style>
 
 </ResourceDictionary>
