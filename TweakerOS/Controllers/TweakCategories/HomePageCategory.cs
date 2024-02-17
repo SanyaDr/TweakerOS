@@ -6,7 +6,7 @@ namespace TweakerOS.Controllers.TweakCategories;
 
 public class HomePageCategory: ICategory
 {
-    public string Name => "Главнаяя";
+    public string Name => "Главная";
     public string Description => "На этой странице вы можете увидеть информацию о приложении";
     public string SystemCodeName => "Home";
 

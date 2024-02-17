@@ -12,6 +12,7 @@ public class PerformanceTweakCategory:ICategory
     public string Name => "Производительность";
     public string Description => "Повысьте производительность вашей системы!";
     public string SystemCodeName => "Performance";
+
     public ReadOnlyCollection<ITweak> Tweaks
     {
         get

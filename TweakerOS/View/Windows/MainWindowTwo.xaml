@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
         mc:Ignorable="d"
         Height="650" Width="1000"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
@@ -61,13 +62,13 @@
                             </EventTrigger>
                         </ToggleButton.Triggers>
                     </ToggleButton>
+                    <!-- Categories -->
                     <StackPanel Grid.Row="3" x:Name="MenuButtons">
                         <RadioButton x:Name="HomeRadioButton" IsChecked="True" Content="Главная"
                                      Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource HomeMenuRb}"
                                      Click="CategoryClick" />
                     </StackPanel>
                     <!-- End: Menu -->
-
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                                 Width="250" Margin="0 0 10 25">
 
@@ -80,16 +81,41 @@
                             <Label Content=" - О программе" Style="{DynamicResource MenuAboutProgramLabelStyle}"
                                    FontWeight="Regular" FontSize="12" Margin="0 0 -15 0" />
                         </StackPanel>
-
-
                     </StackPanel>
 
-
                 </Grid>
-
-
             </Border>
+            <!-- End: Left Control Panel -->
 
+            <!-- Start: Right Side Content -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <!-- Start: Window Control Buttons -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Height="30" Margin="0 5 10 0">
+                    <!-- Minimize Button -->
+                    <Button Style="{StaticResource ControlButtonStyle}" Tag="MinimizeButton"
+                            Click="MinimizeButtonClick" Content="{StaticResource Minimize}" />
+                    <!-- Resize Button -->
+                    <Button Style="{StaticResource ControlButtonStyle}" Tag="ResizeButton" Click="ResizeButtonClick"
+                            Content="{StaticResource Resize}" />
+                    <!-- Close Button -->
+                    <Button Style="{StaticResource ControlButtonStyle}" Tag="CloseButton" Click="CloseButtonClick"
+                            Content="{StaticResource Close}" />
+                </StackPanel>
+                <!-- End: Window Control Buttons -->
+
+                <!-- Start: Page Content -->
+                <Border Grid.Row="1" Margin="10">
+                    <Frame x:Name="PagesNavigation" NavigationUIVisibility="Hidden" />
+                </Border>
+                <!-- End: Page Content -->
+            </Grid>
+            <!-- End: Right Side Content -->
         </Grid>
     </Border>
 </Window>

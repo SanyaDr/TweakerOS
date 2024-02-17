@@ -8,8 +8,10 @@ public static class AllCategories
     {
         List<ICategory> categories =
         [
+            new HomePageCategory(),
             new ViewTweakCategory(),
-            new PerformanceTweakCategory()
+            new PerformanceTweakCategory(),
+            new SystemTweakCategory()
         ];
 
         return categories;

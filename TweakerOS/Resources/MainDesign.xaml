@@ -137,10 +137,48 @@
     <!-- Start: Left Menu Program Info -->
     <Style x:Key="MenuAboutProgramLabelStyle" TargetType="Label">
         <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="Margin" Value="0 0 25 0"/>
+        <Setter Property="Margin" Value="0 0 25 0" />
     </Style>
+    <!-- End: Left Menu Program Info -->
+
+    <!-- Start: Control Window Buttons -->
+    <Style x:Key="ControlButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Margin" Value="7 0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="border" CornerRadius="4" Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Path Name="Icon" Data="{TemplateBinding Content}" Fill="{DynamicResource ActionIconColor}"
+                              Height="10" Width="10" Stretch="Uniform" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SecondaryBackgroundColor}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="Tag" Value="CloseButton" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="Red" />
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource PrimaryBackgroundColor}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- TODO если окно в полном экране то закругление экрана убрать -->
 
 </ResourceDictionary>
