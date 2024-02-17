@@ -36,41 +36,30 @@ public partial class MainWindowTwo : Window
     /// </summary>
     private void AddMenuButtons()
     {
-        // int i = 0;
         foreach (var category in _categories)
         {
             RadioButton rb = new();
             rb.Content = category.Name;
-            rb.Name = category.SystemCodeName + "RadioButton"; // + i.ToString();
-            // PerformanceMenuRb
-            // rb.Tag = FindResource(category.SystemCodeName + "MenuRb");
-            // rb.Tag = FindResource("PerformanceMenuRb");
-            //
-            // Image iconImage = new Image();
-            //
-            //
-            // SvgImageSource svgImageSource = new SvgImageSource(new Uri("путь_к_вашему_файлу.svg", UriKind.RelativeOrAbsolute));
-            //
-            // iconImage.Source = svgImageSource;
-            // radioButton.Content = iconImage;
-            //
-            // DrawingImage img = (DrawingImage)FindResource("PerformanceMenuRb");
-            // BitmapImage img = (BitmapImage)FindResource(category.SystemCodeName + "MenuRb");
-            // rb.Tag = img;
+            rb.Name = category.SystemCodeName + "RadioButton";
+
+            // WIP иконка категории
+            // example: PerformanceMenuRb
+
             rb.Style = (Style)FindResource("MenuRadioButtonStyle");
             rb.Click += CategoryClick;
             MenuButtons.Children.Add(rb);
-            // i++;
         }
     }
 
+    /// <summary>
+    /// Обработка нажатия на кнопку категории
+    /// </summary>
     private void CategoryClick(object sender, RoutedEventArgs e)
     {
         var button = (RadioButton)sender;
-        // int ind = int.Parse(button.Name.Split("RadioButton")[1]);
-        string categoryName = button.Name.Split("RadioButton")[0];
-        ICategory? selectedCategory = null;
-        foreach (var cat in _categories)
+        string categoryName = button.Name.Split("RadioButton")[0];          // Получаем имя категории из названия кнопки
+        ICategory? selectedCategory = null;                                         // Объект категории если мы его нашли
+        foreach (var cat in _categories)                                    // Поиск категории..
         {
             if (cat.SystemCodeName == categoryName)
             {
@@ -79,26 +68,34 @@ public partial class MainWindowTwo : Window
             }
         }
 
-        // PagesNavigation.Navigate(new Uri("/View/Pages/"+ _categories[ind].SystemCodeName + "Page.xaml",
-        //     UriKind.RelativeOrAbsolute));
         if (selectedCategory != null)
         {
+            // Если категория найдена, то переходим на страницу этой категории
             var pageName = "/View/Pages/" + selectedCategory.SystemCodeName + "Page.xaml";
             PagesNavigation.Navigate(new Uri(pageName,
                 UriKind.RelativeOrAbsolute));
         }
     }
-
+    
+    /// <summary>
+    /// Закрытие приложения
+    /// </summary>
     private void CloseButtonClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
-
+    
+    /// <summary>
+    /// Открытие окна приложения во весь экран
+    /// </summary>
     private void ResizeButtonClick(object sender, RoutedEventArgs e)
     {
         WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
     }
 
+    /// <summary>
+    /// Сворачивание окна приложения
+    /// </summary>
     private void MinimizeButtonClick(object sender, RoutedEventArgs e)
     {
         WindowState = WindowState.Minimized;
