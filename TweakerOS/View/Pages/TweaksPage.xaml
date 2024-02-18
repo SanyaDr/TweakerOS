@@ -7,8 +7,8 @@
       mc:Ignorable="d"
       Title="TweaksPage"
       d:DesignHeight="450" d:DesignWidth="800">
-    <Border CornerRadius="5" Background="{DynamicResource SecondaryBackgroundColor}">
-        <StackPanel>
+    <Border CornerRadius="5" Background="{DynamicResource SecondaryBackgroundColor}" Padding="0 0 0 10">
+        <StackPanel x:Name="TweaksStackPanel">
             <Border Style="{DynamicResource TweakBorderStyle}">
                 <Grid ShowGridLines="False">
                     <Grid.ColumnDefinitions>
