@@ -8,17 +8,10 @@
     </Style>
 
     <Style x:Key="NameTweakLabelStyle" TargetType="Label">
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="14"></Setter>
     </Style>
-
-    <!-- TODO удали лишние комментарии -->
-    <!-- <Style x:Key="InfoImageStyle" TargetType="Image"> -->
-    <!--     <Setter Property="Cursor" Value="Hand" /> -->
-    <!--     <Setter Property="Margin" Value="5" /> -->
-    <!--     <Setter Property="Stretch" Value="UniformToFill" /> -->
-    <!-- </Style> -->
 
     <Style x:Key="InfoButtonStyle" TargetType="Button">
         <Setter Property="Cursor" Value="Hand" />
@@ -26,27 +19,17 @@
         <Setter Property="Width" Value="34"></Setter>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <!-- <Setter Property="Template"> -->
-        <!--     <Setter.Value> -->
-        <!--         <ControlTemplate TargetType="Button"> -->
-        <!--             <Border Background="{TemplateBinding Background}" -->
-        <!--                     BorderThickness="{TemplateBinding BorderThickness}"> -->
-        <!--             </Border> -->
-        <!--         </ControlTemplate> -->
-        <!--     </Setter.Value> -->
-        <!-- </Setter> -->
+        <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
-    
+
     <Style x:Key="TweakBorderStyle" TargetType="Border">
-        <Setter Property="Background" Value="{DynamicResource TweakBackgroundColor}"/>
-        <Setter Property="Margin" Value="10 10 10 0"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#262626"/>
-        <Setter Property="CornerRadius" Value="5"/>
-        <Setter Property="Height" Value="45"/>
+        <Setter Property="Background" Value="{DynamicResource TweakBackgroundColor}" />
+        <Setter Property="Margin" Value="10 10 10 0" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#262626" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Height" Value="45" />
     </Style>
-    
-    
+
 
 </ResourceDictionary>

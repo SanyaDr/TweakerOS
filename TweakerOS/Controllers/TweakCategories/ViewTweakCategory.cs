@@ -17,6 +17,8 @@ public class ViewTweakCategory : ICategory
         {
             Collection<ITweak> tweaks = new();
             tweaks.Add(new ContextCopyToMoveTo());
+            tweaks.Add(new ClassicPhotoViewer());
+            tweaks.Add(new ChangeHighlightColor());
             return tweaks.AsReadOnly();
         }
     }

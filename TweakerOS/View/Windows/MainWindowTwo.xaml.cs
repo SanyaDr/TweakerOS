@@ -1,11 +1,14 @@
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using TweakerOS.Controllers.TweakCategories;
 using TweakerOS.Interfaces;
 using TweakerOS.Tweaks.System;
 using TweakerOS.View.Pages;
+using TweakerOS.View.Windows;
 
 namespace TweakerOS.View;
 
@@ -30,6 +33,7 @@ public partial class MainWindowTwo : Window
     {
         _categories = AllCategories.GetCategories();
         AddMenuButtons();
+        ShowMenuToggleButton.IsChecked = true;
     }
 
     /// <summary>
@@ -45,9 +49,9 @@ public partial class MainWindowTwo : Window
 
             // WIP иконка категории
             // example: PerformanceMenuRb
-            rb.Tag = (PathGeometry)FindResource("PerformanceMenuRb");   // - криво отображается
+            rb.Tag = (PathGeometry)FindResource("PerformanceMenuRb"); // - криво отображается
 
-            
+
             // rb.Tag = (PathGeometry)FindResource("ViewMenuRb");
             rb.Style = (Style)FindResource("MenuRadioButtonStyle");
             rb.Click += CategoryClick;
@@ -109,5 +113,18 @@ public partial class MainWindowTwo : Window
     private void MinimizeButtonClick(object sender, RoutedEventArgs e)
     {
         WindowState = WindowState.Minimized;
+    }
+
+    private void HyperlinkInBrowser_Navigate(object sender, RequestNavigateEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+        e.Handled = true;
+    }
+
+    private void HyperlinkLocal_Navigate(object sender, RequestNavigateEventArgs e)
+    {
+        AboutWindow about = new();
+        about.Show();
+        e.Handled = true;
     }
 }

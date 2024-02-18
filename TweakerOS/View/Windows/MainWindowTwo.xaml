@@ -37,7 +37,8 @@
                     </StackPanel>
 
                     <!-- Start: Menu -->
-                    <ToggleButton Grid.Row="0" Style="{StaticResource LeftMenuButtonStyle}">
+                    <ToggleButton Grid.Row="0" x:Name="ShowMenuToggleButton"
+                                  Style="{StaticResource LeftMenuButtonStyle}">
 
                         <ToggleButton.Triggers>
                             <EventTrigger RoutedEvent="ToggleButton.Unchecked">
@@ -72,15 +73,32 @@
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                                 Width="250" Margin="0 0 10 25">
 
-                        <Label Content="TweakerOS" Style="{DynamicResource MenuAboutProgramLabelStyle}"
-                               Foreground="{DynamicResource TextPrimaryColor}" />
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Версия 0.2 x64" Style="{DynamicResource MenuAboutProgramLabelStyle}"
-                                   FontWeight="Regular" Margin="0 0 -10 0" FontSize="12" />
-                            <!-- TODO Добавить ссылку на окно "О программе"-->
-                            <Label Content=" - О программе" Style="{DynamicResource MenuAboutProgramLabelStyle}"
-                                   FontWeight="Regular" FontSize="12" Margin="0 0 -15 0" />
-                        </StackPanel>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+
+                            <TextBlock Grid.Row="0" Margin="0 0 25 10"
+                                       Style="{StaticResource MenuAboutProgramTextBlockStyle}">
+                                <Hyperlink NavigateUri="https://github.com/SanyaDr/TweakerOS"
+                                           RequestNavigate="HyperlinkInBrowser_Navigate"
+                                           Style="{StaticResource MenuAboutProgramHyperLinkStyle}" FontSize="16"
+                                           FontWeight="SemiBold">
+                                    TweakerOS
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock Grid.Row="1"
+                                       Style="{StaticResource MenuAboutProgramTextBlockStyle}">
+                                <Hyperlink NavigateUri="/View/Windows/AboutWindow.xaml"
+                                           RequestNavigate="HyperlinkLocal_Navigate"
+                                           Style="{StaticResource MenuAboutProgramHyperLinkStyle}">
+                                    Версия 0.2 x64  -  О программе
+                                </Hyperlink>
+                            </TextBlock>
+                        </Grid>
                     </StackPanel>
 
                 </Grid>
@@ -88,7 +106,7 @@
             <!-- End: Left Control Panel -->
 
             <!-- Start: Right Side Content -->
-            <Grid Grid.Column="1" ShowGridLines="True">
+            <Grid Grid.Column="1" ShowGridLines="False">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
                     <RowDefinition />

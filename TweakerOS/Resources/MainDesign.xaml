@@ -108,7 +108,6 @@
                                        Foreground="{TemplateBinding Foreground}"
                                        FontWeight="{TemplateBinding FontWeight}"
                                        FontSize="{TemplateBinding FontSize}" />
-
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -135,11 +134,15 @@
     <!-- End: Menu RadioButton -->
 
     <!-- Start: Left Menu Program Info -->
-    <Style x:Key="MenuAboutProgramLabelStyle" TargetType="Label">
+    <Style x:Key="MenuAboutProgramHyperLinkStyle" TargetType="Hyperlink">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryColor}" />
+        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="TextDecorations" Value="" />
+    </Style>
+    <Style x:Key="MenuAboutProgramTextBlockStyle" TargetType="TextBlock">
         <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="HorizontalContentAlignment" Value="Right" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="0 0 25 0" />
     </Style>
     <!-- End: Left Menu Program Info -->
