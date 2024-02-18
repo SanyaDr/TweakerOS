@@ -8,7 +8,7 @@ public class HomePageCategory: ICategory
 {
     public string Name => "Главная";
     public string Description => "На этой странице вы можете увидеть информацию о приложении";
-    public string SystemCodeName => "Home";
+    public string SystemCodeName => "InfoHome";
 
     public ReadOnlyCollection<ITweak> Tweaks
     {

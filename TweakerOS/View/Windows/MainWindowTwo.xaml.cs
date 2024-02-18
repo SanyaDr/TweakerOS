@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 using TweakerOS.Controllers.TweakCategories;
 using TweakerOS.Interfaces;
 using TweakerOS.Tweaks.System;
+using TweakerOS.View.Pages;
 
 namespace TweakerOS.View;
 
@@ -44,8 +45,11 @@ public partial class MainWindowTwo : Window
 
             // WIP иконка категории
             // example: PerformanceMenuRb
+            // rb.Tag = (PathGeometry)FindResource("PerformanceMenuRb");    - криво отображается
 
+            
             rb.Style = (Style)FindResource("MenuRadioButtonStyle");
+            rb.Tag = (PathGeometry)FindResource("ViewMenuRb");
             rb.Click += CategoryClick;
             MenuButtons.Children.Add(rb);
         }
@@ -57,9 +61,9 @@ public partial class MainWindowTwo : Window
     private void CategoryClick(object sender, RoutedEventArgs e)
     {
         var button = (RadioButton)sender;
-        string categoryName = button.Name.Split("RadioButton")[0];          // Получаем имя категории из названия кнопки
-        ICategory? selectedCategory = null;                                         // Объект категории если мы его нашли
-        foreach (var cat in _categories)                                    // Поиск категории..
+        string categoryName = button.Name.Split("RadioButton")[0]; // Получаем имя категории из названия кнопки
+        ICategory? selectedCategory = null; // Объект категории если мы его нашли
+        foreach (var cat in _categories) // Поиск категории..
         {
             if (cat.SystemCodeName == categoryName)
             {
@@ -71,12 +75,18 @@ public partial class MainWindowTwo : Window
         if (selectedCategory != null)
         {
             // Если категория найдена, то переходим на страницу этой категории
-            var pageName = "/View/Pages/" + selectedCategory.SystemCodeName + "Page.xaml";
-            PagesNavigation.Navigate(new Uri(pageName,
-                UriKind.RelativeOrAbsolute));
+            if (!selectedCategory.SystemCodeName.StartsWith("Info"))
+            {
+                PagesNavigation.Navigate(new TweaksPage(selectedCategory));
+            }
+            else
+            {
+                string pageName = "/View/Pages/" + selectedCategory.SystemCodeName.Split("Info")[1] + "Page.xaml";
+                PagesNavigation.Navigate(new Uri(pageName, UriKind.RelativeOrAbsolute));
+            }
         }
     }
-    
+
     /// <summary>
     /// Закрытие приложения
     /// </summary>
@@ -84,7 +94,7 @@ public partial class MainWindowTwo : Window
     {
         Close();
     }
-    
+
     /// <summary>
     /// Открытие окна приложения во весь экран
     /// </summary>
