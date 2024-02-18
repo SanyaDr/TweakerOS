@@ -9,6 +9,5 @@ public partial class TweaksPage : Page
     {
         InitializeComponent();
 
-        textLabel.Content = ((ICategory)extraData).Name;
     }
 }

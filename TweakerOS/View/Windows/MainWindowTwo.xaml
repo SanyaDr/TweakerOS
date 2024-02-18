@@ -88,7 +88,7 @@
             <!-- End: Left Control Panel -->
 
             <!-- Start: Right Side Content -->
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" ShowGridLines="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
                     <RowDefinition />
