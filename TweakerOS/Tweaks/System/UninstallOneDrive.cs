@@ -17,6 +17,8 @@ public class UninstallOneDrive : ITweak
         throw new NotImplementedException();
     }
 
+    public bool ExplorerRebootRequires { get; }
+
     public void Enable()
     {
         try

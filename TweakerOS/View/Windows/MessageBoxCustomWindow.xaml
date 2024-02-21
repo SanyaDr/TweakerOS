@@ -9,5 +9,26 @@
     <Border CornerRadius="5">
         <!-- Кастомный MessageBox чтобы при показать информацию о твике в красивом окне  -->
         
+        <Label x:Name="textLabel"/>
+        
+        <!-- TODO Код из инета, его еще надо проверить -->
+        <!-- <Grid> -->
+        <!--     <Grid.RowDefinitions> -->
+        <!--         <RowDefinition Height="*"/> -->
+        <!--         <RowDefinition Height="Auto"/> -->
+        <!--     </Grid.RowDefinitions> -->
+        <!--     <TextBlock Name="MessageContainer" TextWrapping="WrapWithOverflow" Margin="10"/> -->
+        <!--     <StackPanel Name="ButtonContainer" Grid.Row="1" Orientation="Horizontal" -->
+        <!--                 HorizontalAlignment="Right" Margin="10"> -->
+        <!--         <StackPanel.Resources> -->
+        <!--             <Style TargetType="Button"> -->
+        <!--                 <Setter Property="MinHeight" Value="25"/> -->
+        <!--                 <Setter Property="MinWidth" Value="75"/> -->
+        <!--                 <Setter Property="Margin" Value="10,0,0,0"/> -->
+        <!--             </Style> -->
+        <!--         </StackPanel.Resources> -->
+        <!--     </StackPanel> -->
+        <!-- </Grid> -->
+
     </Border>
 </Window>

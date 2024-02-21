@@ -38,5 +38,7 @@ namespace TweakerOS.Tweaks.Performance
             return Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Mozilla\Firefox", "DisableTelemetry", null) != null ||
                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Mozilla\Firefox", "DisableDefaultBrowserAgent", null) != null;
         }
+
+        public bool ExplorerRebootRequires { get; }
     }
 }

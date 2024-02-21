@@ -14,6 +14,8 @@ public class XboxLive : ITweak
         throw new NotImplementedException();
     }
 
+    public bool ExplorerRebootRequires { get; }
+
     public void Enable()
     {
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc", "Start", "2",

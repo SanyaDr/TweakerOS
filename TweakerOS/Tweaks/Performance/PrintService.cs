@@ -27,5 +27,7 @@ namespace TweakerOS.Tweaks.SystemServices
             int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", -1);
             return startValue != 2;
         }
+
+        public bool ExplorerRebootRequires => false;
     }
 }

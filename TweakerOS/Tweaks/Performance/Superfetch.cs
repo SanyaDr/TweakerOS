@@ -39,5 +39,7 @@ namespace TweakerOS.Tweaks.SystemServices
 
             return sysMainStartValue != 2 || enableSuperfetchValue != 1 || enablePrefetcherValue != 1 || sfTracingStateValue != 1;
         }
+
+        public bool ExplorerRebootRequires => false;
     }
 }

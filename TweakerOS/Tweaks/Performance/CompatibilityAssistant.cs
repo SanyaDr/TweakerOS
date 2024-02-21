@@ -2,7 +2,7 @@
 using TweakerOS.Interfaces;
 using TweakerWin.TweakHelper;
 
-namespace TweakerOS.Tweaks.SystemServices
+namespace TweakerOS.Tweaks.Performance
 {
     internal class CompatibilityAssistant : ITweak
     {
@@ -24,8 +24,10 @@ namespace TweakerOS.Tweaks.SystemServices
 
         public bool GetIsChanged()
         {
-            int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", -1);
+            int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", -1)!;
             return startValue != 2;
         }
+
+        public bool ExplorerRebootRequires => false;
     }
 }

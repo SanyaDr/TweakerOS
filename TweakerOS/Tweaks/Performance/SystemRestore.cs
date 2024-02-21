@@ -55,5 +55,8 @@ namespace TweakerOS.Tweaks.SystemServices
 
             return vssStartValue != 2 || disableSRValue != 1 || disableConfigValue != 1;
         }
+
+        public bool ExplorerRebootRequires => false;
+
     }
 }

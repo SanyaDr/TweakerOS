@@ -38,6 +38,8 @@ namespace TweakerOS.Tweaks.Performance
             // Проверяем, отличаются ли текущие значения от ожидаемых
             return (currentAppendCompletion != "yes" || currentAutoSuggest != "yes");
         }
+
+        public bool ExplorerRebootRequires => false;
     }
     
 }

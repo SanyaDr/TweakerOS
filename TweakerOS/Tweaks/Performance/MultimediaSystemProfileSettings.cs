@@ -9,7 +9,7 @@ using TweakerWin.TweakHelper;
 
 namespace TweakerOS.Tweaks.Performance
 {
-    internal class MultimediaSystemProfileSettings : ITweak
+    internal class MultimediaSystemProfileSettings : TweakerOS.Interfaces.ITweak
     {
         public string Name => "Настройки профиля мультимедиа системы";
 
@@ -68,5 +68,7 @@ namespace TweakerOS.Tweaks.Performance
                 enableFrameServerModeValue != 0 || lowLatencyGpuPriorityValue != 0 || lowLatencyPriorityValue != 8 ||
                 lowLatencySchedulingCategoryValue != "Medium" || lowLatencySfioPriorityValue != "High";
         }
+
+        public bool ExplorerRebootRequires { get; }
     }
 }

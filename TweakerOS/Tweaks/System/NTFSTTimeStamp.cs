@@ -14,6 +14,8 @@ public class NTFSTTimeStamp : ITweak
         throw new NotImplementedException();
     }
 
+    public bool ExplorerRebootRequires { get; }
+
     public void Enable()
     {
         Utilities.RunCommand("fsutil behavior set disablelastaccess 2");

@@ -7,7 +7,8 @@ namespace TweakerOS.Tweaks.Performance
     /// <summary>
     /// // Убирает задержку при отображении меню.
     /// </summary>
-    internal class NoDelayMenuShowingUp : ITweak
+    internal class NoDelayMenuShowingUp : 
+        ITweak
     {
         public string Name => "Отобразить все значки в панели задач";
 
@@ -37,5 +38,7 @@ namespace TweakerOS.Tweaks.Performance
                 return true;
             }
         }
+
+        public bool ExplorerRebootRequires { get; }
     }
 }

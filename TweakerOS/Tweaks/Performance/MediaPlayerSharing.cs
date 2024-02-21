@@ -32,5 +32,7 @@ namespace TweakerOS.Tweaks.Performance
             int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WMPNetworkSvc", "Start", -1);
             return startValue != 2;
         }
+
+        public bool ExplorerRebootRequires => false;
     }
 }

@@ -50,8 +50,7 @@ public partial class MainWindowTwo : Window
             // WIP иконка категории
             // example: PerformanceMenuRb
             rb.Tag = (PathGeometry)FindResource("PerformanceMenuRb"); // - криво отображается
-
-
+            
             // rb.Tag = (PathGeometry)FindResource("ViewMenuRb");
             rb.Style = (Style)FindResource("MenuRadioButtonStyle");
             rb.Click += CategoryClick;

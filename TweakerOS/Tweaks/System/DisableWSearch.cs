@@ -17,6 +17,8 @@ public class DisableWSearch : ITweak
         throw new NotImplementedException();
     }
 
+    public bool ExplorerRebootRequires { get; }
+
     public void Enable()
     {
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch", "Start", "2",

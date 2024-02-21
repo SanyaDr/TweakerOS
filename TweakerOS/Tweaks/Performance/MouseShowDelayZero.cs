@@ -37,5 +37,7 @@ namespace TweakerOS.Tweaks.Performance
             // Если значения отличаются от ожидаемого (0), то возвращаем true, иначе false
             return (currentMenuShowDelay != 0 || currentMouseHoverTime != 0);
         }
+
+        public bool ExplorerRebootRequires { get; }
     }
 }

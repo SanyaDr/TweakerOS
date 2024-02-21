@@ -35,5 +35,7 @@ namespace TweakerOS.Tweaks.Performance
             int nonBestEffortLimitValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched", "NonBestEffortLimit", -1);
             return networkThrottlingIndexValue == 80 || nonBestEffortLimitValue == 0;
         }
+
+        public bool ExplorerRebootRequires { get; }
     }
 }

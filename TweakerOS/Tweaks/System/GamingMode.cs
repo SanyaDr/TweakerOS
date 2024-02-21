@@ -13,6 +13,8 @@ public class GamingMode : ITweak
         throw new NotImplementedException();
     }
 
+    public bool ExplorerRebootRequires { get; }
+
     public void Enable()
     {
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", "2",

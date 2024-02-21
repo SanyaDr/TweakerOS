@@ -14,8 +14,10 @@ public class ClassicPhotoViewer : ITweak
 
     public bool GetIsChanged()
     {
-        throw new NotImplementedException();
+        return true;
     }
+
+    public bool ExplorerRebootRequires { get; }
 
     public void Enable()
     {

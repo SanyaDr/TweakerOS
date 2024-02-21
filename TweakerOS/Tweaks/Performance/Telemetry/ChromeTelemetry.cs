@@ -41,5 +41,7 @@ namespace TweakerOS.Tweaks.Performance
                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome", "UserFeedbackAllowed", null) != null ||
                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome", "DeviceMetricsReportingEnabled", null) != null;
         }
+
+        public bool ExplorerRebootRequires { get; }
     }
 }

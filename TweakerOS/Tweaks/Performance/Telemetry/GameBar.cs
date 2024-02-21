@@ -43,5 +43,7 @@ namespace TweakerOS.Tweaks.Performance
 
             return appCaptureValue != 0 || audioCaptureValue != 0 || cursorCaptureValue != 0 || useNexusValue != 0 || showStartupValue != 0 || gameDVRValue != 0 || allowGameDVRValue != 0;
         }
+
+        public bool ExplorerRebootRequires { get; }
     }
 }

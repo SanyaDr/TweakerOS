@@ -32,6 +32,8 @@ namespace TweakerOS.Tweaks.Performance
             int currentCrashDumpEnabled = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl", "CrashDumpEnabled", -1);
             return (currentCrashDumpEnabled == 3);
         }
+
+        public bool ExplorerRebootRequires { get; }
     }
     }
 

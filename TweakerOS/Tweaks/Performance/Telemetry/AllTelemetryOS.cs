@@ -260,5 +260,7 @@ namespace TweakerOS.Tweaks.Performance
         {
             return false;
         }
+
+        public bool ExplorerRebootRequires { get; }
     }
 }

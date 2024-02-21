@@ -13,10 +13,14 @@ public class ContextCopyToMoveTo :ITweak
                                  "\"Копровать в..\" и \"Вставить в..\"";
     public bool GetIsChanged()
     {
-        throw new NotImplementedException();
+        bool v1 = (bool)Registry.ClassesRoot.GetValue(@"AllFilesystemObjects\\shellex\\ContextMenuHandlers\\Copy To", false);
+        bool v2 = (bool)Registry.ClassesRoot.GetValue(@"AllFilesystemObjects\\shellex\\ContextMenuHandlers\\Move To", false);
+        return v1 == v2 && v2 == false;
     }
 
-    
+    public bool ExplorerRebootRequires { get; }
+
+
     public void Enable()
     {
         Registry.SetValue("HKEY_CLASSES_ROOT\\AllFilesystemObjects\\shellex\\ContextMenuHandlers\\Copy To", "", "{C2FBB630-2971-11D1-A18C-00C04FD75D13}");

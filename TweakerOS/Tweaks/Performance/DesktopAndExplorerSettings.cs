@@ -77,5 +77,7 @@ namespace TweakerOS.Tweaks.Performance
 
             return settingsChanged;
         }
+
+        public bool ExplorerRebootRequires => false;
     }
 }

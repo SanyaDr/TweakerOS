@@ -44,5 +44,7 @@ namespace TweakerOS.Tweaks.Performance
             int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", -1);
             return startValue != 2; 
         }
+
+        public bool ExplorerRebootRequires { get; }
     }
 }

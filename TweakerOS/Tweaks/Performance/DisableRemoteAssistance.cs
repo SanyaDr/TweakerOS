@@ -30,6 +30,8 @@ namespace TweakerOS.Tweaks.Performance
             int fAllowToGetHelp = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Remote Assistance", "fAllowToGetHelp", -1);
             return (fAllowToGetHelp == 0);
         }
+
+        public bool ExplorerRebootRequires => false;
     }
 }
 

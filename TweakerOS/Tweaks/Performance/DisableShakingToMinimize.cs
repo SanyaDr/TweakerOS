@@ -29,5 +29,7 @@ namespace TweakerOS.Tweaks.Performance
             int disallowShaking = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "DisallowShaking", -1);
             return (disallowShaking == 0);
         }
+
+        public bool ExplorerRebootRequires => false;
     }
 }

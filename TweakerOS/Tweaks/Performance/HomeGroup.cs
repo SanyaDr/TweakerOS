@@ -41,5 +41,7 @@ namespace TweakerOS.Tweaks.Performance
             int providerStartValue = (int)Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\HomeGroupProvider", "Start", -1);
             return listenerStartValue != 4 || providerStartValue != 4;
         }
+
+        public bool ExplorerRebootRequires=> false;
     }
 }
