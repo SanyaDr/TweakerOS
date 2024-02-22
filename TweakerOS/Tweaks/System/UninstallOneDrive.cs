@@ -12,12 +12,14 @@ public class UninstallOneDrive : ITweak
     public string Name => "Удалить OneDrive с устройства";
     public string Description => "Твик удаляет OneDrive с вашего компьютера";
 
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         try
         {
@@ -56,7 +58,7 @@ public class UninstallOneDrive : ITweak
         }
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         DeleteCMDHelper.RunCmdCommand("taskkill /f /im OneDrive.exe");
         Thread.Sleep(5000);

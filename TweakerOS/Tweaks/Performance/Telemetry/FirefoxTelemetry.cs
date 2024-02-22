@@ -15,7 +15,7 @@ namespace TweakerOS.Tweaks.Performance
 
         public string Description => ".";
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Mozilla\Firefox", "DisableTelemetry", 1);
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Mozilla\Firefox", "DisableDefaultBrowserAgent", 1);
@@ -24,7 +24,7 @@ namespace TweakerOS.Tweaks.Performance
             Utilities.RunCommand("schtasks.exe /change /disable /tn \"\\Mozilla\\Firefox Default Browser Agent D2CEEC440E2074BD\"");
         }
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Mozilla\Firefox", "DisableTelemetry");
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Mozilla\Firefox", "DisableDefaultBrowserAgent");
@@ -33,10 +33,12 @@ namespace TweakerOS.Tweaks.Performance
             Utilities.RunCommand("schtasks.exe /change /enable /tn \"\\Mozilla\\Firefox Default Browser Agent D2CEEC440E2074BD\"");
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             return Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Mozilla\Firefox", "DisableTelemetry", null) != null ||
                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Mozilla\Firefox", "DisableDefaultBrowserAgent", null) != null;
         }
+
+        public bool RebootRequires { get; }
     }
 }

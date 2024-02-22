@@ -2,7 +2,7 @@
 using TweakerOS.Interfaces;
 using TweakerWin.TweakHelper;
 
-namespace TweakerOS.Tweaks.SystemServices
+namespace TweakerOS.Tweaks.Performance
 {
     internal class CompatibilityAssistant : ITweak
     {
@@ -10,22 +10,24 @@ namespace TweakerOS.Tweaks.SystemServices
 
         public string Description => "Включает службу совместимости в Windows.";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Utilities.StopService("PcaSvc");
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", "4", RegistryValueKind.DWord);
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", "2", RegistryValueKind.DWord);
             Utilities.StartService("PcaSvc");
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
-            int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", -1);
+            int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", -1)!;
             return startValue != 2;
         }
+
+        public bool RebootRequires => false;
     }
 }

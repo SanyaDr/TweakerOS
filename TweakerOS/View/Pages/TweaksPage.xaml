@@ -12,14 +12,18 @@
             <Border Style="{DynamicResource TweakBorderStyle}">
                 <Grid ShowGridLines="False">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.1*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <!-- <ColumnDefinition Width="0.1*" /> -->
                         <ColumnDefinition />
                         <ColumnDefinition Width="0.08*" />
                     </Grid.ColumnDefinitions>
 
                     <!-- ToggleButton -->
-                    <CheckBox Grid.Column="0" Style="{DynamicResource CheckBoxTweakStyle}" />
-
+                    <!-- <CheckBox Grid.Column="0" Style="{DynamicResource CheckBoxTweakStyle}" /> -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <Button Content="Вкл" Style="{StaticResource TweakDoubleButtonsStyle}" Margin="8 5 4 5"/>
+                        <Button Content="Выкл" Style="{StaticResource TweakDoubleButtonsStyle}" Margin="4 5 8 5"/>
+                    </StackPanel>
                     <!-- Tweak name -->
                     <Label Grid.Column="1" Style="{DynamicResource NameTweakLabelStyle}" Content="Отключить Xbox Live" />
 

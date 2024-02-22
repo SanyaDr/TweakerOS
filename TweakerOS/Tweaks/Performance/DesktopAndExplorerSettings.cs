@@ -16,7 +16,7 @@ namespace TweakerOS.Tweaks.Performance
             "такие как время ожидания для завершения задач, время ожидания зависших приложений, " +
             "игнорирование проверок свободного места на диске и другие аспекты поведения операционной системы.";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true).DeleteValue("AutoEndTasks", false);
             Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true).DeleteValue("HungAppTimeout", false);
@@ -30,7 +30,7 @@ namespace TweakerOS.Tweaks.Performance
             Registry.SetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control", "WaitToKillServiceTimeout", "5000", RegistryValueKind.DWord);
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue("HKEY_CURRENT_USER\\Control Panel\\Desktop", "AutoEndTasks", "1", RegistryValueKind.DWord);
             Registry.SetValue("HKEY_CURRENT_USER\\Control Panel\\Desktop", "HungAppTimeout", "1000", RegistryValueKind.DWord);
@@ -44,7 +44,7 @@ namespace TweakerOS.Tweaks.Performance
             Registry.SetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control", "WaitToKillServiceTimeout", "2000", RegistryValueKind.DWord);
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             // Проверяем, внесены ли изменения
             bool settingsChanged = false;
@@ -71,11 +71,14 @@ namespace TweakerOS.Tweaks.Performance
             if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoInternetOpenWith", null) as string != "00000001")
                 settingsChanged = true;
 
+          
             // Проверяем настройку таймаута завершения служб
-            if ((int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control", "WaitToKillServiceTimeout", -1) != 5000)
+            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control", "WaitToKillServiceTimeout", "-1") as string != "5000")
                 settingsChanged = true;
 
             return settingsChanged;
         }
+
+        public bool RebootRequires => false;
     }
 }

@@ -10,7 +10,7 @@ namespace TweakerOS.Tweaks.Performance
 
         public string Description => "Включает или отключает сбор телеметрии в браузере Microsoft Edge.";
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "PersonalizationReportingEnabled", 0);
             Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge", "PersonalizationReportingEnabled", 0);
@@ -29,7 +29,7 @@ namespace TweakerOS.Tweaks.Performance
             Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge", "SpotlightExperiencesAndRecommendationsEnabled", 0);
         }
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Edge\SmartScreenEnabled", "");
             Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Edge\SmartScreenPuaEnabled", "");
@@ -48,9 +48,11 @@ namespace TweakerOS.Tweaks.Performance
             Utilities.TryDeleteRegistryValue(false, @"SOFTWARE\Policies\Microsoft\Edge", "SpotlightExperiencesAndRecommendationsEnabled");
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             return false;
         }
+
+        public bool RebootRequires { get; }
     }
 }

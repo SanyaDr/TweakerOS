@@ -11,12 +11,14 @@ public class DisableWindowsDefender:ITweak
 {
     public string Name => "Отключить защитник Windows";
     public string Description => "Отключает антивирус Windows Defender \nНЕ РЕКОМЕНДУЕТСЯ!";
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender", "DisableAntiVirus", "1", RegistryValueKind.DWord);
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender", "DisableSpecialRunningModes", "1", RegistryValueKind.DWord);
@@ -50,7 +52,7 @@ public class DisableWindowsDefender:ITweak
             }
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         //TODO check null ref..
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine", "MpEnablePus", "1", RegistryValueKind.DWord);

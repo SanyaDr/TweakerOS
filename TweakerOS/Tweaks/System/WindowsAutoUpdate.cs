@@ -9,12 +9,14 @@ public class WindowsAutoUpdate : ITweak
     public string Name => "Отключить автообновление Windows";
     public string Description => "Отключает автоматические обновления Windows";
 
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization",
             "SystemSettingsDownloadMode");
@@ -33,7 +35,7 @@ public class WindowsAutoUpdate : ITweak
             "MaintenanceDisabled");
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         Registry.SetValue(
             @"HKEY_USERS\S-1-5-20\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings",

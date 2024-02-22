@@ -14,14 +14,14 @@ namespace TweakerOS.Tweaks.Performance
 
         public string Description => "Отключает ограничение сети в Windows.";
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Int32 tempInt = Convert.ToInt32("ffffffff", 16);
             Registry.SetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", "NetworkThrottlingIndex", tempInt, RegistryValueKind.DWord);
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched", "NonBestEffortLimit", 0, RegistryValueKind.DWord);
         }
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched", "NonBestEffortLimit", 80, RegistryValueKind.DWord);
             Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", true).DeleteValue("NetworkThrottlingIndex", false);
@@ -29,11 +29,13 @@ namespace TweakerOS.Tweaks.Performance
             Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\Dnscache\Parameters", true).DeleteValue("MaxNegativeCacheTtl", false);
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             int networkThrottlingIndexValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NetworkThrottlingIndex", -1);
             int nonBestEffortLimitValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched", "NonBestEffortLimit", -1);
             return networkThrottlingIndexValue == 80 || nonBestEffortLimitValue == 0;
         }
+
+        public bool RebootRequires { get; }
     }
 }

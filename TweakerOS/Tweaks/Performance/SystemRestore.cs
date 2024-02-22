@@ -12,7 +12,7 @@ namespace TweakerOS.Tweaks.SystemServices
 
         public string Description => "Отключает системное восстановление в Windows.";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             try
             {
@@ -39,7 +39,7 @@ namespace TweakerOS.Tweaks.SystemServices
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore", "DisableConfig", "1", RegistryValueKind.DWord);
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore", "DisableSR");
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore", "DisableConfig");
@@ -47,7 +47,7 @@ namespace TweakerOS.Tweaks.SystemServices
             Utilities.StartService("VSS");
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             int vssStartValue = (int)Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VSS", "Start", -1);
             int disableSRValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore", "DisableSR", -1);
@@ -55,5 +55,8 @@ namespace TweakerOS.Tweaks.SystemServices
 
             return vssStartValue != 2 || disableSRValue != 1 || disableConfigValue != 1;
         }
+
+        public bool RebootRequires => false;
+
     }
 }

@@ -8,12 +8,14 @@ public class GamingMode : ITweak
     public string Name => "Отключить Игровой режим";
     public string Description => "Отключает игровой режим в системе";
 
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", "2",
             RegistryValueKind.DWord);
@@ -25,7 +27,7 @@ public class GamingMode : ITweak
             RegistryValueKind.DWord);
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", "1",
             RegistryValueKind.DWord);

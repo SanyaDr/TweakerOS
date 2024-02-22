@@ -1,21 +1,17 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Headers;
+using Microsoft.Win32;
 using TweakerOS.Interfaces;
 using TweakerWin.TweakHelper;
 
-namespace TweakerOS.Tweaks.Performance
+namespace TweakerOS.Tweaks.Performance.Telemetry
 {
-    class AllTelemetryOS : ITweak
+    class AllTelemetryOs : ITweak
     {
         public string Name => "Отключить не нужную телеметрию windows";
 
         public string Description => "Отключает телеметрию разных служб Find my device, Wi-Fi, Windows Hello и тд.";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenOverlayEnabled");
             Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenEnabled");
@@ -135,7 +131,7 @@ namespace TweakerOS.Tweaks.Performance
             Utilities.TryDeleteRegistryValue(true, @"Software\Policies\Microsoft\Windows\System", "RSoPLogging");
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenOverlayEnabled", "0", RegistryValueKind.DWord);
             Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenEnabled", "0", RegistryValueKind.DWord);
@@ -255,10 +251,12 @@ namespace TweakerOS.Tweaks.Performance
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System", "EnableMmx", 0, RegistryValueKind.DWord);
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System", "RSoPLogging", 0, RegistryValueKind.DWord);
         }
-
-        public bool GetIsChanged()
+        
+        public bool GetTweakIsApplied()
         {
-            return false;
+            throw new NotImplementedException();
         }
+
+        public bool RebootRequires => true;
     }
 }

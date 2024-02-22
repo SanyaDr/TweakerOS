@@ -15,22 +15,24 @@ namespace TweakerOS.Tweaks.Performance
 
         public string Description => "Отключает совместное использование медиаплеера Windows.";
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Utilities.StopService("WMPNetworkSvc");
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WMPNetworkSvc", "Start", "4", RegistryValueKind.DWord);
         }
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WMPNetworkSvc", "Start", "2", RegistryValueKind.DWord);
             Utilities.StartService("WMPNetworkSvc");
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WMPNetworkSvc", "Start", -1);
             return startValue != 2;
         }
+
+        public bool RebootRequires => false;
     }
 }

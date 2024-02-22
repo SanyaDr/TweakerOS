@@ -10,7 +10,7 @@ namespace TweakerOS.Tweaks.SystemServices
 
         public string Description => "Отключает службу Superfetch и связанные настройки в Windows.";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Utilities.StopService("SysMain");
 
@@ -20,7 +20,7 @@ namespace TweakerOS.Tweaks.SystemServices
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters", "SfTracingState", "1", RegistryValueKind.DWord);
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain", "Start", "2", RegistryValueKind.DWord);
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters", "EnableSuperfetch", "1", RegistryValueKind.DWord);
@@ -30,7 +30,7 @@ namespace TweakerOS.Tweaks.SystemServices
             Utilities.StartService("SysMain");
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             int sysMainStartValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain", "Start", -1);
             int enableSuperfetchValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters", "EnableSuperfetch", -1);
@@ -39,5 +39,7 @@ namespace TweakerOS.Tweaks.SystemServices
 
             return sysMainStartValue != 2 || enableSuperfetchValue != 1 || enablePrefetcherValue != 1 || sfTracingStateValue != 1;
         }
+
+        public bool RebootRequires => false;
     }
 }

@@ -17,19 +17,19 @@ namespace TweakerOS.Tweaks.Performance
 
         public string Description => "Автозаполнение команд при запуске диалогового окна WIN + R";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete", true).DeleteValue("Append Completion", false);
             Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete", true).DeleteValue("AutoSuggest", false);
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete", "Append Completion", "yes", RegistryValueKind.String);
             Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete", "AutoSuggest", "yes", RegistryValueKind.String);
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             // Получаем текущие значения из реестра
             string currentAppendCompletion = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete", "Append Completion", null) as string;
@@ -38,6 +38,8 @@ namespace TweakerOS.Tweaks.Performance
             // Проверяем, отличаются ли текущие значения от ожидаемых
             return (currentAppendCompletion != "yes" || currentAutoSuggest != "yes");
         }
+
+        public bool RebootRequires => false;
     }
     
 }

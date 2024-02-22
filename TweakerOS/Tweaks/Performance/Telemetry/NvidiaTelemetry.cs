@@ -15,7 +15,7 @@ namespace TweakerOS.Tweaks.Performance
 
         public string Description => ".";
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", 4);
 
@@ -27,7 +27,7 @@ namespace TweakerOS.Tweaks.Performance
             Utilities.RunCommand("sc.exe stop NvTelemetryContainer");
         }
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", 2);
 
@@ -39,10 +39,12 @@ namespace TweakerOS.Tweaks.Performance
             Utilities.RunCommand("sc.exe start NvTelemetryContainer");
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", -1);
             return startValue != 2; 
         }
+
+        public bool RebootRequires { get; }
     }
 }

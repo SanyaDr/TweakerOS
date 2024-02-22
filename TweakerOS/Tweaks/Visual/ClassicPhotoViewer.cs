@@ -12,12 +12,14 @@ public class ClassicPhotoViewer : ITweak
     public string Name => "Открывать фотографии через классическое приложение Windows";
     public string Description => "Открывать фотографии через классическое приложение Windows";
 
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
-        throw new NotImplementedException();
+        return true;
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         RegistryKey regKey = Registry.ClassesRoot;
 
@@ -116,7 +118,7 @@ public class ClassicPhotoViewer : ITweak
         }
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         string currentUserKey = @"HKEY_CURRENT_USER";
         string localMachineKey = @"HKEY_LOCAL_MACHINE";

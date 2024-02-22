@@ -9,7 +9,7 @@ using TweakerWin.TweakHelper;
 
 namespace TweakerOS.Tweaks.Performance
 {
-    internal class MultimediaSystemProfileSettings : ITweak
+    internal class MultimediaSystemProfileSettings : TweakerOS.Interfaces.ITweak
     {
         public string Name => "Настройки профиля мультимедиа системы";
 
@@ -17,7 +17,7 @@ namespace TweakerOS.Tweaks.Performance
             "играх и приложениях с низкой задержкой. Настройки включают режим отзывчивости системы, приоритеты графического процессора (GPU)" +
             ", приоритеты задач, категории планирования и приоритеты ввода-вывода файловой системы (SFIO).";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", 1, RegistryValueKind.DWord);
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NoLazyMode", 1, RegistryValueKind.DWord);
@@ -33,7 +33,7 @@ namespace TweakerOS.Tweaks.Performance
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Low Latency", "SFIO Priority", "High", RegistryValueKind.String);
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", 14, RegistryValueKind.DWord);
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NoLazyMode");
@@ -48,7 +48,7 @@ namespace TweakerOS.Tweaks.Performance
             Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Low Latency", true).DeleteValue("SFIO Priority", false);
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             int systemResponsivenessValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", -1);
             int noLazyModeValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NoLazyMode", -1);
@@ -68,5 +68,7 @@ namespace TweakerOS.Tweaks.Performance
                 enableFrameServerModeValue != 0 || lowLatencyGpuPriorityValue != 0 || lowLatencyPriorityValue != 8 ||
                 lowLatencySchedulingCategoryValue != "Medium" || lowLatencySfioPriorityValue != "High";
         }
+
+        public bool RebootRequires { get; }
     }
 }

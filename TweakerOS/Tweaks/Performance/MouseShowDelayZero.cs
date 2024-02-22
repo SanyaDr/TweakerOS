@@ -15,27 +15,32 @@ namespace TweakerOS.Tweaks.Performance
     {
         public string Name => "Убрать задержку отображения меню";
 
-        public string Description => "// Устанавливает задержку отображения меню и времени задержки при наведении мыши в ноль.";
+        public string Description =>
+            "// Устанавливает задержку отображения меню и времени задержки при наведении мыши в ноль.";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Registry.SetValue("HKEY_CURRENT_USER\\Control Panel\\Desktop", "MenuShowDelay", "400");
             Registry.SetValue("HKEY_CURRENT_USER\\Control Panel\\Mouse", "MouseHoverTime", "400");
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue("HKEY_CURRENT_USER\\Control Panel\\Desktop", "MenuShowDelay", 0);
             Registry.SetValue("HKEY_CURRENT_USER\\Control Panel\\Mouse", "MouseHoverTime", 0);
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
-            int currentMenuShowDelay = (int)Registry.GetValue("HKEY_CURRENT_USER\\Control Panel\\Desktop", "MenuShowDelay", -1);
-            int currentMouseHoverTime = (int)Registry.GetValue("HKEY_CURRENT_USER\\Control Panel\\Mouse", "MouseHoverTime", -1);
+            int.TryParse(Registry.GetValue("HKEY_CURRENT_USER\\Control Panel\\Desktop", "MenuShowDelay", -1).ToString(),
+                out int currentMenuShowDelay);
+            int.TryParse(Registry.GetValue("HKEY_CURRENT_USER\\Control Panel\\Mouse", "MouseHoverTime", -1).ToString(),
+                out int currentMouseHoverTime);
 
             // Если значения отличаются от ожидаемого (0), то возвращаем true, иначе false
             return (currentMenuShowDelay != 0 || currentMouseHoverTime != 0);
         }
+
+        public bool RebootRequires { get; }
     }
 }

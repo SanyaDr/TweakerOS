@@ -9,12 +9,14 @@ public class SmartScreen : ITweak
     public string Name => "Отключить SmartScreen";
     public string Description => Name;
 
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments",
             "SaveZoneInformation", "1", RegistryValueKind.DWord);
@@ -39,7 +41,7 @@ public class SmartScreen : ITweak
         }
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\Policies\Attachments",
             "SaveZoneInformation");

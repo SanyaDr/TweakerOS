@@ -10,7 +10,7 @@ namespace TweakerOS.Tweaks.Performance
 
         public string Description => "Включает или отключает сбор телеметрии в Visual Studio.";
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\Telemetry", "TurnOffSwitch", 1);
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableFeedbackDialog", 1);
@@ -33,7 +33,7 @@ namespace TweakerOS.Tweaks.Performance
             }
         }
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\VisualStudio\Telemetry", "TurnOffSwitch");
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableFeedbackDialog");
@@ -56,7 +56,7 @@ namespace TweakerOS.Tweaks.Performance
             }
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
 
             bool isChanged = false;
@@ -103,5 +103,7 @@ namespace TweakerOS.Tweaks.Performance
 
             return isChanged;
         }
+
+        public bool RebootRequires { get; }
     }
 }

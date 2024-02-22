@@ -9,12 +9,14 @@ public class XboxLive : ITweak
     public string Name => "Отключить службу Xbox Live";
     public string Description => "Твик отключает службу Xbox Live";
 
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc", "Start", "2",
             RegistryValueKind.DWord);
@@ -34,7 +36,7 @@ public class XboxLive : ITweak
         Utilities.StartService("xbgm");
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         Utilities.StopService("XboxNetApiSvc");
         Utilities.StopService("XblAuthManager");

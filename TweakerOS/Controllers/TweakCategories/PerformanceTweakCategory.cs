@@ -3,6 +3,7 @@ using System.Windows.Automation;
 using TweakerOS.Interfaces;
 using TweakerOS.Tweaks;
 using TweakerOS.Tweaks.Performance;
+using TweakerOS.Tweaks.Performance.Telemetry;
 using TweakerOS.Tweaks.SystemServices;
 
 namespace TweakerOS.Controllers.TweakCategories;
@@ -35,7 +36,7 @@ public class PerformanceTweakCategory:ICategory
             tweaks.Add( new  ServiceTweaksStoped());
             tweaks.Add( new  Superfetch());
             tweaks.Add( new  SystemRestore());
-            tweaks.Add(new AllTelemetryOS());
+            tweaks.Add(new AllTelemetryOs());
             tweaks.Add(new ChromeTelemetry());
             tweaks.Add(new EdgeTelemetry());
             tweaks.Add(new FirefoxTelemetry());

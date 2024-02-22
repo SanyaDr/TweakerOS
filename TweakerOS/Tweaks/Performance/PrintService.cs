@@ -10,22 +10,24 @@ namespace TweakerOS.Tweaks.SystemServices
 
         public string Description => "Отключает службу печати в Windows.";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Utilities.StopService("Spooler");
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", "3", RegistryValueKind.DWord);
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", "2", RegistryValueKind.DWord);
             Utilities.StartService("Spooler");
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", -1);
             return startValue != 2;
         }
+
+        public bool RebootRequires => false;
     }
 }

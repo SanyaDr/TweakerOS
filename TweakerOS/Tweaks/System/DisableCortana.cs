@@ -8,12 +8,14 @@ public class DisableCortana : ITweak
     public string Name => "Отключить ассистента Cortana";
     public string Description => "Отключение Кортаны";
 
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowCortana",
             "1", RegistryValueKind.DWord);
@@ -39,7 +41,7 @@ public class DisableCortana : ITweak
             "AllowCloudSearch", "1", RegistryValueKind.DWord);
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings",
             "IsDeviceSearchHistoryEnabled", "0", RegistryValueKind.DWord);

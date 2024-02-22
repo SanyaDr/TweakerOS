@@ -15,7 +15,7 @@ namespace TweakerOS.Tweaks.Performance
 
         public string Description => ".";
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome", "MetricsReportingEnabled", 0);
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome", "ChromeCleanupReportingEnabled", 0);
@@ -24,7 +24,7 @@ namespace TweakerOS.Tweaks.Performance
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome", "DeviceMetricsReportingEnabled", 0);
         }
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Google\Chrome", "MetricsReportingEnabled");
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Google\Chrome", "ChromeCleanupReportingEnabled");
@@ -33,7 +33,7 @@ namespace TweakerOS.Tweaks.Performance
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Google\Chrome", "DeviceMetricsReportingEnabled");
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             return Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome", "MetricsReportingEnabled", null) != null ||
                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome", "ChromeCleanupReportingEnabled", null) != null ||
@@ -41,5 +41,7 @@ namespace TweakerOS.Tweaks.Performance
                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome", "UserFeedbackAllowed", null) != null ||
                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome", "DeviceMetricsReportingEnabled", null) != null;
         }
+
+        public bool RebootRequires { get; }
     }
 }

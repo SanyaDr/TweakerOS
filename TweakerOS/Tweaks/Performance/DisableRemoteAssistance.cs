@@ -14,22 +14,24 @@ namespace TweakerOS.Tweaks.Performance
 
         public string Description => "Отключает удаленную помощь.";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Remote Assistance", "fAllowToGetHelp", "1", RegistryValueKind.DWord);
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Remote Assistance", "fAllowToGetHelp", "0", RegistryValueKind.DWord);
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             // Проверяем, отключена ли уже удаленная помощь
             int fAllowToGetHelp = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Remote Assistance", "fAllowToGetHelp", -1);
             return (fAllowToGetHelp == 0);
         }
+
+        public bool RebootRequires => false;
     }
 }
 

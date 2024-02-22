@@ -11,17 +11,19 @@ public class DisableSmb: ITweak
 {
     public string Name => "Отключить службу SMB";
     public string Description => "Отключить службу для локальных сетей SMB, она является небезопасной";
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         Utilities.TryDeleteRegistryValue(true, @"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters",
             $"SMB1");    }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters",
             $"SMB1", 0, RegistryValueKind.DWord);

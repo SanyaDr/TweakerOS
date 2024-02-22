@@ -9,12 +9,14 @@ public class WindowsReporting : ITweak
     public string Name => "Отключить журнал об ошибках Windows";
     public string Description => "Отключает отчёты об ошибках Windows";
 
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting", true)
             .DeleteValue("Disabled", false);
@@ -31,7 +33,7 @@ public class WindowsReporting : ITweak
         Utilities.StartService("wercplsupport");
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting",
             "Disabled", 1);

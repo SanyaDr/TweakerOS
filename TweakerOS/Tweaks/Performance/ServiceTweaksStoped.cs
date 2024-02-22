@@ -21,7 +21,7 @@ namespace TweakerOS.Tweaks.Performance
             "и стабильности.\r\n\r\ndmwappushservice: Эта служба отвечает за получение и установку универсальных приложений из Windows Store. " +
             "Она также может выполнять другие задачи, связанные с обновлением и управлением приложениями из магазина Windows.";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             // Включаем службы
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack", "Start", "2", RegistryValueKind.DWord);
@@ -36,7 +36,7 @@ namespace TweakerOS.Tweaks.Performance
             Utilities.StartService("dmwappushservice");
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             // Останавливаем службы
             Utilities.StopService("DiagTrack");
@@ -52,7 +52,7 @@ namespace TweakerOS.Tweaks.Performance
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dmwappushservice", "Start", "4", RegistryValueKind.DWord);
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             bool isChanged = false;
             if (Utilities.ServiceExists("DiagTrack") && Utilities.ServiceExists("diagnosticshub.standardcollector.service") && Utilities.ServiceExists("dmwappushservice"))
@@ -68,6 +68,8 @@ namespace TweakerOS.Tweaks.Performance
             }
             return isChanged;
         }
+
+        public bool RebootRequires { get; }
     }
 
 }

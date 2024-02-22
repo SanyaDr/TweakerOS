@@ -14,20 +14,22 @@ namespace TweakerOS.Tweaks.Performance
 
         public string Description => "Отключает тряску окна для минимизации.";
 
-        public void Disable()
+        public void RestoreToFactory()
         {
             Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "DisallowShaking", "0", RegistryValueKind.DWord);
         }
 
-        public void Enable()
+        public void ApplyTweak()
         {
             Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "DisallowShaking", "1", RegistryValueKind.DWord);
         }
 
-        public bool GetIsChanged()
+        public bool GetTweakIsApplied()
         {
             int disallowShaking = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "DisallowShaking", -1);
             return (disallowShaking == 0);
         }
+
+        public bool RebootRequires => false;
     }
 }

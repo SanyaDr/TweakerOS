@@ -9,12 +9,14 @@ public class WindowsStoreUpdates : ITweak
     public string Name => "Отключение обновлений Windows Store";
     public string Description => Name;
 
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager",
             "SilentInstalledAppsEnabled");
@@ -29,7 +31,7 @@ public class WindowsStoreUpdates : ITweak
         Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload");
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager",
             "SilentInstalledAppsEnabled", "0", RegistryValueKind.DWord);

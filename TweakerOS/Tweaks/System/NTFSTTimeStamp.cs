@@ -9,17 +9,19 @@ public class NTFSTTimeStamp : ITweak
     public string Name => "Отключить временный штампы NTFS";
     public string Description => ""; // TODO Добавь понятное описание этого твика
 
-    public bool GetIsChanged()
+    public bool GetTweakIsApplied()
     {
         throw new NotImplementedException();
     }
 
-    public void Enable()
+    public bool RebootRequires { get; }
+
+    public void ApplyTweak()
     {
         Utilities.RunCommand("fsutil behavior set disablelastaccess 2");
     }
 
-    public void Disable()
+    public void RestoreToFactory()
     {
         Utilities.RunCommand("fsutil behavior set disablelastaccess 1");
     }
