@@ -1,9 +1,4 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TweakerOS.Interfaces;
 using TweakerWin.TweakHelper;
 
@@ -41,8 +36,16 @@ namespace TweakerOS.Tweaks.Performance
 
         public bool GetTweakIsApplied()
         {
-            int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", -1);
-            return startValue != 2; 
+            try
+            {
+                int startValue = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", -1) ?? -1);
+                return startValue != 2;
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
+
         }
 
         public bool RebootRequires { get; }

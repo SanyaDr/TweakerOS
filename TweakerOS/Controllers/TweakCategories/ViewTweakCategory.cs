@@ -19,6 +19,9 @@ public class ViewTweakCategory : ICategory
             tweaks.Add(new ContextCopyToMoveTo());
             tweaks.Add(new ClassicPhotoViewer());
             tweaks.Add(new ChangeHighlightColor());
+            tweaks.Add(new DeleteFoldersFromComputer());
+            tweaks.Add(new DisablingSuffixArrowShortcut());
+            tweaks.Add(new TransparencyStartMenu());
             return tweaks.AsReadOnly();
         }
     }

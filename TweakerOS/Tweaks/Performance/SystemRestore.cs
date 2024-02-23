@@ -49,12 +49,19 @@ namespace TweakerOS.Tweaks.SystemServices
 
         public bool GetTweakIsApplied()
         {
-            int vssStartValue = (int)Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VSS", "Start", -1);
-            int disableSRValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore", "DisableSR", -1);
-            int disableConfigValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore", "DisableConfig", -1);
+            try
+            {
+                int vssStartValue = (int)(Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VSS", "Start", -1) ?? -1);
+                int disableSRValue = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore", "DisableSR", -1) ?? -1);
+                int disableConfigValue = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore", "DisableConfig", -1) ?? -1);
 
-            return vssStartValue != 2 || disableSRValue != 1 || disableConfigValue != 1;
+                return vssStartValue != 2 || disableSRValue != 1 || disableConfigValue != 1;
+            }catch
+            {
+                throw new NotImplementedException();
+            }
         }
+
 
         public bool RebootRequires => false;
 

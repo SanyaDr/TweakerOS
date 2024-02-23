@@ -58,51 +58,58 @@ namespace TweakerOS.Tweaks.Performance
 
         public bool GetTweakIsApplied()
         {
-
-            bool isChanged = false;
-
-            int turnOffSwitchValue = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\Telemetry", "TurnOffSwitch", -1);
-            int disableFeedbackDialogValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableFeedbackDialog", -1);
-            int disableEmailInputValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableEmailInput", -1);
-            int disableScreenshotCaptureValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableScreenshotCapture", -1);
-            int optInValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\VisualStudio\SQM", "OptIn", -1);
-            int concurrentDownloadsValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Setup", "ConcurrentDownloads", -1);
-
-            if (turnOffSwitchValue != 1 ||
-                disableFeedbackDialogValue != 1 ||
-                disableEmailInputValue != 1 ||
-                disableScreenshotCaptureValue != 1 ||
-                optInValue != 0 ||
-                concurrentDownloadsValue != 2)
+            try
             {
-                isChanged = true;
-            }
+                bool isChanged = false;
 
-            if (Environment.Is64BitOperatingSystem)
-            {
-                int sqm14Value = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VSCommon\14.0\SQM", "OptIn", -1);
-                int sqm15Value = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VSCommon\15.0\SQM", "OptIn", -1);
-                int sqm16Value = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VSCommon\16.0\SQM", "OptIn", -1);
+                int turnOffSwitchValue = (int)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\Telemetry", "TurnOffSwitch", -1) ?? -1);
+                int disableFeedbackDialogValue = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableFeedbackDialog", -1) ?? -1);
+                int disableEmailInputValue = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableEmailInput", -1) ?? -1);
+                int disableScreenshotCaptureValue = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableScreenshotCapture", -1) ?? -1);
+                int optInValue = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\VisualStudio\SQM", "OptIn", -1) ?? -1);
+                int concurrentDownloadsValue = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Setup", "ConcurrentDownloads", -1) ?? -1);
 
-                if (sqm14Value != 0 || sqm15Value != 0 || sqm16Value != 0)
+                if (turnOffSwitchValue != 1 ||
+                    disableFeedbackDialogValue != 1 ||
+                    disableEmailInputValue != 1 ||
+                    disableScreenshotCaptureValue != 1 ||
+                    optInValue != 0 ||
+                    concurrentDownloadsValue != 2)
                 {
                     isChanged = true;
                 }
-            }
-            else
-            {
-                int sqm14Value = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VSCommon\14.0\SQM", "OptIn", -1);
-                int sqm15Value = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VSCommon\15.0\SQM", "OptIn", -1);
-                int sqm16Value = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VSCommon\16.0\SQM", "OptIn", -1);
 
-                if (sqm14Value != 0 || sqm15Value != 0 || sqm16Value != 0)
+                if (Environment.Is64BitOperatingSystem)
                 {
-                    isChanged = true;
-                }
-            }
+                    int sqm14Value = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VSCommon\14.0\SQM", "OptIn", -1) ?? -1);
+                    int sqm15Value = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VSCommon\15.0\SQM", "OptIn", -1) ?? -1);
+                    int sqm16Value = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VSCommon\16.0\SQM", "OptIn", -1) ?? -1);
 
-            return isChanged;
+                    if (sqm14Value != 0 || sqm15Value != 0 || sqm16Value != 0)
+                    {
+                        isChanged = true;
+                    }
+                }
+                else
+                {
+                    int sqm14Value = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VSCommon\14.0\SQM", "OptIn", -1) ?? -1);
+                    int sqm15Value = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VSCommon\15.0\SQM", "OptIn", -1) ?? -1);
+                    int sqm16Value = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VSCommon\16.0\SQM", "OptIn", -1) ?? -1);
+
+                    if (sqm14Value != 0 || sqm15Value != 0 || sqm16Value != 0)
+                    {
+                        isChanged = true;
+                    }
+                }
+
+                return isChanged;
+            }
+            catch 
+            {
+                throw new NotImplementedException();
+            }
         }
+
 
         public bool RebootRequires { get; }
     }

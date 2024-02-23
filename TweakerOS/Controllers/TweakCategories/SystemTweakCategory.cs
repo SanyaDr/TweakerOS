@@ -27,6 +27,7 @@ public class SystemTweakCategory : ICategory
             tweaks.Add(new WindowsReporting());
             tweaks.Add(new WindowsStoreUpdates());
             tweaks.Add(new XboxLive());
+            tweaks.Add(new DisableLUA());
             return tweaks.AsReadOnly();
         }
     }

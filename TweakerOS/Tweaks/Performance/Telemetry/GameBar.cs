@@ -33,16 +33,33 @@ namespace TweakerOS.Tweaks.Performance
 
         public bool GetTweakIsApplied()
         {
-            int appCaptureValue = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", 1);
-            int audioCaptureValue = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR", "AudioCaptureEnabled", 1);
-            int cursorCaptureValue = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR", "CursorCaptureEnabled", 1);
-            int useNexusValue = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", 1);
-            int showStartupValue = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "ShowStartupPanel", 1);
-            int gameDVRValue = (int)Registry.GetValue(@"HKEY_CURRENT_USER\System\GameConfigStore", "GameDVR_Enabled", 1);
-            int allowGameDVRValue = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\GameDVR", "AllowGameDVR", 1) ?? "-1");
+            // Проверяем существование реестра
+            var gameDVRKeyExists = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\GameDVR") != null;
+            var gameBarKeyExists = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\GameBar") != null;
+            var gameConfigStoreKeyExists = Registry.CurrentUser.OpenSubKey(@"System\GameConfigStore") != null;
+            var gameDVRPolicyKeyExists = Registry.LocalMachine.OpenSubKey(@"Software\Policies\Microsoft\Windows\GameDVR") != null;
 
-            return appCaptureValue != 0 || audioCaptureValue != 0 || cursorCaptureValue != 0 || useNexusValue != 0 || showStartupValue != 0 || gameDVRValue != 0 || allowGameDVRValue != 0;
+            // Если реестр существует, получаем значения ключей
+            if (gameDVRKeyExists && gameBarKeyExists && gameConfigStoreKeyExists && gameDVRPolicyKeyExists)
+            {
+                var appCaptureValue = (int)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", 1) ?? 1);
+                var audioCaptureValue = (int)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR", "AudioCaptureEnabled", 1) ?? 1);
+                var cursorCaptureValue = (int)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR", "CursorCaptureEnabled", 1) ?? 1);
+                var useNexusValue = (int)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", 1) ?? 1);
+                var showStartupValue = (int)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "ShowStartupPanel", 1) ?? 1);
+                var gameDVRValue = (int)(Registry.GetValue(@"HKEY_CURRENT_USER\System\GameConfigStore", "GameDVR_Enabled", 1) ?? 1);
+                var allowGameDVRValue = (int)(Registry.GetValue(@"HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\GameDVR", "AllowGameDVR", 1) ?? 1);
+
+                // Возвращаем результат проверки
+                return appCaptureValue != 0 || audioCaptureValue != 0 || cursorCaptureValue != 0 || useNexusValue != 0 || showStartupValue != 0 || gameDVRValue != 0 || allowGameDVRValue != 0;
+            }
+            else
+            {
+                // Если реестр не существует, считаем, что твик не применен
+                return false;
+            }
         }
+
 
         public bool RebootRequires { get; }
     }
