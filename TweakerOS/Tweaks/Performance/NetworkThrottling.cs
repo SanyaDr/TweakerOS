@@ -31,9 +31,21 @@ namespace TweakerOS.Tweaks.Performance
 
         public bool GetTweakIsApplied()
         {
-            int networkThrottlingIndexValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NetworkThrottlingIndex", -1);
-            int nonBestEffortLimitValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched", "NonBestEffortLimit", -1);
-            return networkThrottlingIndexValue == 80 || nonBestEffortLimitValue == 0;
+            try
+            {
+
+                int networkThrottlingIndexValue = (int)Registry.GetValue(
+                    @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile",
+                    "NetworkThrottlingIndex", -1);
+                int nonBestEffortLimitValue = (int)Registry.GetValue(
+                    @"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched", "NonBestEffortLimit", -1);
+                return networkThrottlingIndexValue == 80 || nonBestEffortLimitValue == 0;
+
+            }
+            catch (NullReferenceException e)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public bool RebootRequires { get; }
