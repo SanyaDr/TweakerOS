@@ -70,11 +70,7 @@ namespace TweakerOS.Tweaks.Performance
                 settingsChanged = true;
             if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoInternetOpenWith", null) as string != "00000001")
                 settingsChanged = true;
-
-          
-            // Проверяем настройку таймаута завершения служб
-            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control", "WaitToKillServiceTimeout", "-1") as string != "5000")
-                settingsChanged = true;
+            
 
             return settingsChanged;
         }
