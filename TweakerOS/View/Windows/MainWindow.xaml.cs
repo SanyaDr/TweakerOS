@@ -12,14 +12,14 @@ using TweakerOS.View.Windows;
 
 namespace TweakerOS.View;
 
-public partial class MainWindowTwo : Window
+public partial class MainWindow : Window
 {
     /// <summary>
     /// Список всех добавленных категорий
     /// </summary>
     private List<ICategory> _categories;
 
-    public MainWindowTwo()
+    public MainWindow()
     {
         InitializeComponent();
 
