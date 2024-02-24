@@ -29,8 +29,7 @@ namespace TweakerOS.Tweaks.Performance
 
         public bool GetTweakIsApplied()
         {
-            int currentCrashDumpEnabled = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl", "CrashDumpEnabled", -1);
-            return (currentCrashDumpEnabled == 3);
+            return Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl", "CrashDumpEnabled", -1) is int CrashDumpEnabled && CrashDumpEnabled == 3;
         }
 
         public bool RebootRequires { get; }

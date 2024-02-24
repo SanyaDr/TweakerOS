@@ -1,9 +1,4 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TweakerOS.Interfaces;
 using TweakerWin.TweakHelper;
 
@@ -37,11 +32,12 @@ namespace TweakerOS.Tweaks.Performance
 
         public bool GetTweakIsApplied()
         {
-            int listenerStartValue = (int)(Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\HomeGroupListener", "Start", -1) ?? -1) ;
+            int listenerStartValue = (int)(Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\HomeGroupListener", "Start", -1) ?? -1);
             int providerStartValue = (int)(Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\HomeGroupProvider", "Start", -1) ?? -1);
-            return listenerStartValue != 4 || providerStartValue != 4;
+            int homegroupmain = (int)(Registry.GetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\HomeGroupProvider", "Start", -1) ?? -1);
+            return listenerStartValue == 4 || providerStartValue == 4 || homegroupmain == 1;
         }
 
-        public bool RebootRequires=> false;
+        public bool RebootRequires => false;
     }
 }

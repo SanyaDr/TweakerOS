@@ -12,20 +12,20 @@ namespace TweakerOS.Tweaks.Performance
 
         public void RestoreToFactory()
         {
-            Utilities.StopService("PcaSvc");
-            Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", "4", RegistryValueKind.DWord);
+            Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", "2", RegistryValueKind.DWord);
+            Utilities.StartService("PcaSvc");
         }
 
         public void ApplyTweak()
         {
-            Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", "2", RegistryValueKind.DWord);
-            Utilities.StartService("PcaSvc");
+            Utilities.StopService("PcaSvc");
+            Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", "4", RegistryValueKind.DWord);
         }
 
         public bool GetTweakIsApplied()
         {
             int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PcaSvc", "Start", -1)!;
-            return startValue != 2;
+            return startValue == 4;
         }
 
         public bool RebootRequires => false;

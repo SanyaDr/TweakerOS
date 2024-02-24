@@ -28,11 +28,7 @@ namespace TweakerOS.Tweaks.Performance
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "2", RegistryValueKind.DWord);
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dmwappushservice", "Start", "2", RegistryValueKind.DWord);
 
-            // Включение службы удаленного реестра
-            Utilities.RunCommand("sc config \"RemoteRegistry\" start= auto");
-
             Utilities.StartService("DiagTrack");
-            Utilities.StartService("diagnosticshub.standardcollector.service");
             Utilities.StartService("dmwappushservice");
         }
 
@@ -40,11 +36,7 @@ namespace TweakerOS.Tweaks.Performance
         {
             // Останавливаем службы
             Utilities.StopService("DiagTrack");
-            Utilities.StopService("diagnosticshub.standardcollector.service");
             Utilities.StopService("dmwappushservice");
-
-            // Отключаем службу удаленного реестра
-            Utilities.RunCommand("sc config \"RemoteRegistry\" start= disabled");
 
             // Устанавливаем тип запуска для служб
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack", "Start", "4", RegistryValueKind.DWord);
@@ -54,19 +46,9 @@ namespace TweakerOS.Tweaks.Performance
 
         public bool GetTweakIsApplied()
         {
-            bool isChanged = false;
-            if (Utilities.ServiceExists("DiagTrack") && Utilities.ServiceExists("diagnosticshub.standardcollector.service") && Utilities.ServiceExists("dmwappushservice"))
-            {
-                if (!Utilities.IsServiceRunning("DiagTrack") || !Utilities.IsServiceRunning("diagnosticshub.standardcollector.service") || !Utilities.IsServiceRunning("dmwappushservice"))
-                {
-                    isChanged = true;
-                }
-            }
-            else
-            {
-                isChanged = true;
-            }
-            return isChanged;
+            int DiagTrack = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack", "Start", -1)!;
+            int Dmwapp = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dmwappushservice", "Start", -1)!;
+            return DiagTrack == 4 && Dmwapp == 4;
         }
 
         public bool RebootRequires { get; }
