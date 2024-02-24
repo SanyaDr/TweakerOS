@@ -1,0 +1,28 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Standard Light Theme -->
+    
+    <!-- Background Colors -->
+    <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#ebebeb" />
+    <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#f9f9f9" />
+    
+    <!-- Object Colors -->
+    <SolidColorBrush x:Key="PrimaryBlueColor" Color="DodgerBlue"/>
+    <SolidColorBrush x:Key="PrimaryGrayColor" Color="#8c8c90"/>
+    <!-- <SolidColorBrush x:Key="PrimaryGrayColor" Color="#BFBFC4"/> -->
+    
+    
+    <SolidColorBrush x:Key="SecondaryGrayColor" Color="#EEEEEE"/>
+   
+    <!-- Text Colors -->
+    <SolidColorBrush x:Key="TextPrimaryColor" Color="#020F16"/>
+    <SolidColorBrush x:Key="TextSecondaryColor" Color="#434344"/>
+
+    <!-- Icons Colors -->
+    <SolidColorBrush x:Key="ActionIconColor" Color="#434344"/>
+    
+    <!-- Tweak Colors -->
+    <SolidColorBrush x:Key="TweakBackgroundColor" Color="#f2f2f2" />
+
+    
+</ResourceDictionary>

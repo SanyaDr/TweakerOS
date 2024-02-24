@@ -1,0 +1,197 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+
+    <!-- Start: Logo Content -->
+    <Style x:Key="LogoIconStyle" TargetType="Image">
+        <Setter Property="Margin" Value="16 0 0 0" />
+        <Setter Property="Stretch" Value="Fill" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="LogoLabelStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBlueColor}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="Margin" Value="16 0 0 0" />
+    </Style>
+    <!-- End: Logo Content -->
+
+    <!-- Start: Show Left Menu Button -->
+    <Style x:Key="LeftMenuButtonStyle" TargetType="ToggleButton">
+        <Setter Property="Width" Value="30" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="16 0 0 0" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                        <Viewbox Height="20" Width="20" Margin="0 6 0 0 "
+                                 Stretch="UniformToFill">
+                            <Canvas Height="512" Width="512">
+                                <Path x:Name="menuIcon1"
+                                      Data="m32 0h448c17.671875 0 32 14.328125 32 32s-14.328125 32-32 32h-448c-17.671875 0-32-14.328125-32-32s14.328125-32 32-32zm0 0"
+                                      Fill="{DynamicResource PrimaryGrayColor}" Margin="0 0 0 0" />
+                                <Path x:Name="menuIcon2"
+                                      Data="m32 128h448c17.671875 0 32 14.328125 32 32s-14.328125 32-32 32h-448c-17.671875 0-32-14.328125-32-32s14.328125-32 32-32zm0 0"
+                                      Fill="{DynamicResource PrimaryGrayColor}" Margin="0 20 0 0" />
+                                <Path x:Name="menuIcon3"
+                                      Data="m32 256h448c17.671875 0 32 14.328125 32 32s-14.328125 32-32 32h-448c-17.671875 0-32-14.328125-32-32s14.328125-32 32-32zm0 0"
+                                      Fill="{DynamicResource PrimaryGrayColor}" Margin="0 40 0 0" />
+                            </Canvas>
+                        </Viewbox>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Fill" TargetName="menuIcon1" Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter Property="Fill" TargetName="menuIcon2" Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter Property="Fill" TargetName="menuIcon3" Value="{DynamicResource PrimaryBlueColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- End: Show Left Menu Button -->
+
+    <!-- Start: Menu RadioButtons -->
+    <Style x:Key="MenuRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryGrayColor}" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="MenuRadioButton" Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Selected  -->
+                            <Border x:Name="buttonSelected" Grid.ColumnSpan="2" CornerRadius="4" Width="260"
+                                    HorizontalAlignment="Right" />
+
+                            <!-- Indicator -->
+                            <Rectangle Name="Indicator" HorizontalAlignment="Left" Width="4" Height="40"
+                                       VerticalAlignment="Center" RadiusX="2" RadiusY="2" />
+
+                            <!-- Icon -->
+                            <Path x:Name="Icon"
+                                  Data="{Binding Tag, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}"
+                                  Height="24" Width="24" Stretch="None" Fill="{DynamicResource PrimaryGrayColor}"
+                                  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0" />
+
+                            <!-- Text -->
+                            <TextBlock x:Name="textName" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                       Margin="12 0 0 0"
+                                       Grid.Column="1" Text="{TemplateBinding Content}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       FontSize="{TemplateBinding FontSize}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="textName" Property="Foreground"
+                                    Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource PrimaryBlueColor}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter TargetName="Indicator" Property="Height" Value="20" />
+                            <Setter TargetName="buttonSelected" Property="Background"
+                                    Value="{DynamicResource SecondaryGrayColor}" />
+                            <Setter TargetName="textName" Property="Foreground"
+                                    Value="{DynamicResource PrimaryBlueColor}" />
+                            <Setter TargetName="buttonSelected" Property="CornerRadius" Value="8" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- End: Menu RadioButton -->
+
+    <!-- Start: Left Menu Program Info -->
+    <Style x:Key="MenuAboutProgramHyperLinkStyle" TargetType="Hyperlink">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryColor}" />
+        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="TextDecorations" Value="" />
+    </Style>
+    <Style x:Key="MenuAboutProgramTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 0 25 0" />
+    </Style>
+    <!-- End: Left Menu Program Info -->
+
+    
+    <!-- Start: Apply Tweaks Button -->
+    <Style x:Key="ApplyTweaksButton" TargetType="Button">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="15 0  0 20"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Medium"></Setter>
+    </Style>
+    <!-- End: Apply Tweaks Button -->
+    
+    <!-- Start: Control Window Buttons -->
+    <Style x:Key="ControlButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Margin" Value="7 0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="border" CornerRadius="4" Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Path Name="Icon" Data="{TemplateBinding Content}" Fill="{DynamicResource ActionIconColor}"
+                              Height="10" Width="10" Stretch="Uniform" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SecondaryBackgroundColor}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="Tag" Value="CloseButton" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="Red" />
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource PrimaryBackgroundColor}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- TODO если окно в полном экране то закругление экрана убрать -->
+
+</ResourceDictionary>

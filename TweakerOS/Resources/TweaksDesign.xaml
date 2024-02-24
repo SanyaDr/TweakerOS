@@ -1,0 +1,49 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="CheckBoxTweakStyle" TargetType="CheckBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="6" />
+    </Style>
+
+    <Style x:Key="NameTweakLabelStyle" TargetType="Label">
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="14"></Setter>
+    </Style>
+
+    <Style x:Key="InfoButtonStyle" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Margin" Value="3" />
+        <Setter Property="Width" Value="34"></Setter>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="TweakBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource TweakBackgroundColor}" />
+        <Setter Property="Margin" Value="10 10 10 0" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#262626" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Height" Value="45" />
+    </Style>
+    <Style x:Key="TweakDoubleButtonsStyle" TargetType="Button">
+        <!-- <Setter Property="Margin" Value="10 5"/> -->
+        <Setter Property="Width" Value="50"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button" >
+                    <Border CornerRadius="4" BorderBrush="Black" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>
