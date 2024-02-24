@@ -14,7 +14,7 @@ public class ClassicPhotoViewer : ITweak
 
     public bool GetTweakIsApplied()
     {
-        return true;
+        throw new NotImplementedException();
     }
 
     public bool RebootRequires { get; }

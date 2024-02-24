@@ -13,9 +13,7 @@ public class ContextCopyToMoveTo :ITweak
                                  "\"Копровать в..\" и \"Вставить в..\"";
     public bool GetTweakIsApplied()
     {
-        bool v1 = (bool)Registry.ClassesRoot.GetValue(@"AllFilesystemObjects\\shellex\\ContextMenuHandlers\\Copy To", false);
-        bool v2 = (bool)Registry.ClassesRoot.GetValue(@"AllFilesystemObjects\\shellex\\ContextMenuHandlers\\Move To", false);
-        return v1 == v2 && v2 == false;
+        throw new NotImplementedException();
     }
 
     public bool RebootRequires { get; }
