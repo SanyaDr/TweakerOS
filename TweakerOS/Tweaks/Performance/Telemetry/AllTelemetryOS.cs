@@ -19,7 +19,6 @@ namespace TweakerOS.Tweaks.Performance.Telemetry
             Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "DisableTailoredExperiencesWithDiagnosticData");
 
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Microsoft\Windows\CloudContent", "DisableCloudOptimizedContent");
-            Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests", "value");
             Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled");
             Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising");
 
@@ -254,7 +253,8 @@ namespace TweakerOS.Tweaks.Performance.Telemetry
         
         public bool GetTweakIsApplied()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", -1) is int AdvertisingInfo && AdvertisingInfo == 0;
         }
 
         public bool RebootRequires => true;

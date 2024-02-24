@@ -13,7 +13,7 @@ public class ContextCopyToMoveTo :ITweak
                                  "\"Копровать в..\" и \"Вставить в..\"";
     public bool GetTweakIsApplied()
     {
-        throw new NotImplementedException();
+        return Registry.GetValue(@"HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\Copy To", "", null) is string sa && sa == "{C2FBB630-2971-11D1-A18C-00C04FD75D13}";
     }
 
     public bool RebootRequires { get; }

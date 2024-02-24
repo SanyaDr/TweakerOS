@@ -7,25 +7,28 @@ namespace TweakerOS.Tweaks.System;
 /// <summary>
 /// Отключение службы SMB1
 /// </summary>
-public class DisableSmb: ITweak
+public class DisableSmb : ITweak
 {
     public string Name => "Отключить службу SMB";
-    public string Description => "Отключить службу для локальных сетей SMB, она является небезопасной";
+    public string Description => "Отключить службу для локальных сетей SMB V1, она является небезопасной";
     public bool GetTweakIsApplied()
     {
-        throw new NotImplementedException();
+        return Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters",
+            $"SMB1", -1) is int SMB1 && SMB1 == 0;
     }
 
     public bool RebootRequires { get; }
 
     public void ApplyTweak()
     {
-        Utilities.TryDeleteRegistryValue(true, @"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters",
-            $"SMB1");    }
+        Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters",
+            $"SMB1", 0, RegistryValueKind.DWord);
+
+    }
 
     public void RestoreToFactory()
     {
-        Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters",
-            $"SMB1", 0, RegistryValueKind.DWord);
+        Utilities.TryDeleteRegistryValue(true, @"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters",
+            $"SMB1");
     }
 }
