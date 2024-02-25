@@ -11,7 +11,8 @@ public class XboxLive : ITweak
 
     public bool GetTweakIsApplied()
     {
-        throw new NotImplementedException();
+        return
+            Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc", "Start", -1) is int Start && Start == 2;
     }
 
     public bool RebootRequires { get; }

@@ -1,7 +1,7 @@
+using Microsoft.Win32;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using Microsoft.Win32;
 using TweakerOS.Interfaces;
 using TweakerWin.TweakHelper;
 
@@ -14,7 +14,7 @@ public class UninstallOneDrive : ITweak
 
     public bool GetTweakIsApplied()
     {
-        throw new NotImplementedException();
+        return Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\OneDrive", "DisableFileSyncNGSC", -1) is int DisableFileSyncNGSC && DisableFileSyncNGSC == 0;
     }
 
     public bool RebootRequires { get; }
@@ -183,5 +183,10 @@ public class UninstallOneDrive : ITweak
             MessageBox.Show($"{ex.Message.ToString()}", "SystemTweakcs.UninstallOneDrive", MessageBoxButton.OK,
                 MessageBoxImage.Warning);
         }
+
+
+
+
+
     }
 }

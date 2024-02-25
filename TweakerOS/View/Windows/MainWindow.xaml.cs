@@ -2,15 +2,12 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using TweakerOS.Controllers.TweakCategories;
 using TweakerOS.Interfaces;
-using TweakerOS.Tweaks.System;
 using TweakerOS.View.Pages;
-using TweakerOS.View.Windows;
 
-namespace TweakerOS.View;
+namespace TweakerOS.View.Windows;
 
 public partial class MainWindow : Window
 {
@@ -125,5 +122,10 @@ public partial class MainWindow : Window
         AboutWindow about = new();
         about.Show();
         e.Handled = true;
+    }
+
+    private void HomePageCategoryClick(object sender, RoutedEventArgs e)
+    {
+        PagesNavigation.Navigate(new HomePage());
     }
 }

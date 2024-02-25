@@ -11,32 +11,15 @@ public class WindowsReporting : ITweak
 
     public bool GetTweakIsApplied()
     {
-        throw new NotImplementedException();
+        return Utilities.ServiceExists("wercplsupport") && !Utilities.IsServiceRunning("wercplsupport");
     }
 
     public bool RebootRequires { get; }
 
     public void ApplyTweak()
     {
-        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting", true)
-            .DeleteValue("Disabled", false);
-        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting", true)
-            .DeleteValue("DoReport", false);
-        Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\Windows Error Reporting", true)
-            .DeleteValue("Disabled", false);
-
-        Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wercplsupport", "Start", "3",
-            RegistryValueKind.DWord);
-        Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WerSvc", "Start", "2",
-            RegistryValueKind.DWord);
-        Utilities.StartService("WerSvc");
-        Utilities.StartService("wercplsupport");
-    }
-
-    public void RestoreToFactory()
-    {
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting",
-            "Disabled", 1);
+             "Disabled", 1);
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting", "DoReport", 0);
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting", "Disabled", 1);
 
@@ -46,6 +29,18 @@ public class WindowsReporting : ITweak
             RegistryValueKind.DWord);
         Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wercplsupport", "Start", "4",
             RegistryValueKind.DWord);
-        new NotImplementedException();
+    }
+
+    public void RestoreToFactory()
+    {
+        Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting", "Disabled");
+        Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting", "DoReport");
+        Utilities.TryDeleteRegistryValue(true, @"SOFTWARE\Microsoft\Windows\Windows Error Reporting", "Disabled");
+        Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wercplsupport", "Start", "3",
+            RegistryValueKind.DWord);
+        Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WerSvc", "Start", "2",
+            RegistryValueKind.DWord);
+        Utilities.StartService("WerSvc");
+        Utilities.StartService("wercplsupport");
     }
 }

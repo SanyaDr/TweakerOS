@@ -7,11 +7,20 @@ namespace TweakerOS.Tweaks.System;
 public class SmartScreen : ITweak
 {
     public string Name => "Отключить SmartScreen";
-    public string Description => Name;
+    public string Description => "SmartScreen — это функция встроенной системы безопасности операционной системы Windows. Она предназначена для защиты компьютера от вредоносного программного обеспечения, скачанного из сети";
 
     public bool GetTweakIsApplied()
     {
-        throw new NotImplementedException();
+        return Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments",
+            "SaveZoneInformation", -1) is int SaveZoneInformation && SaveZoneInformation == 1 &&
+            Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System",
+            "ShellSmartScreenLevel", "-1") is string ShellSmartScreenLevel && ShellSmartScreenLevel == "Warn" &&
+            Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer",
+            "SmartScreenEnabled", "-1") is string SmartScreenEnabled && SmartScreenEnabled == "Off" &&
+            Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AppHost", "PreventOverride",
+            -1) is int PreventOverride && PreventOverride == 0;
+
+
     }
 
     public bool RebootRequires { get; }
@@ -33,12 +42,7 @@ public class SmartScreen : ITweak
         Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AppHost", "PreventOverride",
             0, RegistryValueKind.DWord);
 
-        using (RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
-        {
-            key.CreateSubKey(
-                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance")
-                .SetValue("Enabled", 0);
-        }
+        
     }
 
     public void RestoreToFactory()
@@ -56,13 +60,5 @@ public class SmartScreen : ITweak
         Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\AppHost",
             "PreventOverride");
         
-        using (RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
-        {
-            key.OpenSubKey(
-                @"SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance",
-                true).DeleteValue("Enabled", false);
-        }
-        
-        // TODO тут был try-catch обрати внимание на обработку ошибок на верхнем уровне, или проверь как это исправить
     }
 }

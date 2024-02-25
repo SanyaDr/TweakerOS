@@ -7,8 +7,7 @@ namespace TweakerOS.Tweaks.Performance
     /// <summary>
     /// // Убирает задержку при отображении меню.
     /// </summary>
-    internal class NoDelayMenuShowingUp : 
-        ITweak
+    internal class NoDelayMenuShowingUp : ITweak
     {
         public string Name => "Отобразить все значки в панели задач";
 
@@ -26,17 +25,7 @@ namespace TweakerOS.Tweaks.Performance
 
         public bool GetTweakIsApplied()
         {
-            object registryValue = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer", "EnableAutoTray", null);
-            if (registryValue != null && (int)registryValue == 0)
-            {
-                // Значение в реестре соответствует ожидаемому значению.
-                return false;
-            }
-            else
-            {
-                // Значение в реестре отличается от ожидаемого.
-                return true;
-            }
+            return Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer", "EnableAutoTray", -1) is int EnableAutoTray && EnableAutoTray == 0;
         }
 
         public bool RebootRequires { get; }

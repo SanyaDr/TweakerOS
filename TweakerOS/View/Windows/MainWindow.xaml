@@ -1,4 +1,4 @@
-<Window x:Class="TweakerOS.View.MainWindow"
+<Window x:Class="TweakerOS.View.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,7 +8,8 @@
         Height="650" Width="1000"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True"
-        ResizeMode="NoResize" WindowState="Normal">
+        ResizeMode="NoResize" WindowState="Normal" 
+        Title="TweakerOS">
 
     <Border CornerRadius="8" Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
@@ -66,7 +67,7 @@
                     <StackPanel Grid.Row="3" x:Name="MenuButtons">
                         <RadioButton x:Name="HomeRadioButton" IsChecked="True" Content="Главная"
                                      Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource HomeMenuRb}"
-                                     Click="CategoryClick" />
+                                     Click="HomePageCategoryClick" />
                     </StackPanel>
                     
                     <!-- End: Menu -->
@@ -92,7 +93,7 @@
                                 <Hyperlink NavigateUri="/View/Windows/AboutWindow.xaml"
                                            RequestNavigate="HyperlinkLocal_Navigate"
                                            Style="{StaticResource MenuAboutProgramHyperLinkStyle}">
-                                    Версия 0.2 x64  -  О программе
+                                    Версия 1.1 x64  -  О программе
                                 </Hyperlink>
                             </TextBlock>
                         </Grid>

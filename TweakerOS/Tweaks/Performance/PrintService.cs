@@ -12,20 +12,19 @@ namespace TweakerOS.Tweaks.SystemServices
 
         public void RestoreToFactory()
         {
-            Utilities.StopService("Spooler");
-            Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", "3", RegistryValueKind.DWord);
-        }
-
-        public void ApplyTweak()
-        {
             Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", "2", RegistryValueKind.DWord);
             Utilities.StartService("Spooler");
         }
 
+        public void ApplyTweak()
+        {
+            Utilities.StopService("Spooler");
+            Registry.SetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", "3", RegistryValueKind.DWord);
+        }
+
         public bool GetTweakIsApplied()
         {
-            int startValue = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", -1);
-            return startValue != 2;
+            return Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", -1) is int Spooler && Spooler == 3;
         }
 
         public bool RebootRequires => false;

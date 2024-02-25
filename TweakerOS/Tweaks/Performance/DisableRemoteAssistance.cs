@@ -27,8 +27,7 @@ namespace TweakerOS.Tweaks.Performance
         public bool GetTweakIsApplied()
         {
             // Проверяем, отключена ли уже удаленная помощь
-            int fAllowToGetHelp = (int)Registry.GetValue(@"HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Remote Assistance", "fAllowToGetHelp", -1);
-            return (fAllowToGetHelp == 0);
+            return Registry.GetValue(@"HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Remote Assistance", "fAllowToGetHelp", -1) is int fAllowToGetHelp && fAllowToGetHelp == 0;
         }
 
         public bool RebootRequires => false;

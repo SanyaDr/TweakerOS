@@ -1,10 +1,6 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TweakerOS.Interfaces;
+using TweakerWin.TweakHelper;
 
 namespace TweakerOS.Tweaks.Performance
 {
@@ -18,15 +14,17 @@ namespace TweakerOS.Tweaks.Performance
 
         public void RestoreToFactory()
         {
-            Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true).DeleteValue("AutoEndTasks", false);
-            Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true).DeleteValue("HungAppTimeout", false);
-            Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true).DeleteValue("WaitToKillAppTimeout", false);
-            Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true).DeleteValue("LowLevelHooksTimeout", false);
-            Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", true).DeleteValue("NoLowDiskSpaceChecks", false);
-            Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", true).DeleteValue("LinkResolveIgnoreLinkInfo", false);
-            Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", true).DeleteValue("NoResolveSearch", false);
-            Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", true).DeleteValue("NoResolveTrack", false);
-            Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", true).DeleteValue("NoInternetOpenWith", false);
+            Utilities.TryDeleteRegistryValue(false, @"Control Panel\Desktop", "AutoEndTasks");
+            Utilities.TryDeleteRegistryValue(false, @"Control Panel\Desktop", "HungAppTimeout");
+            Utilities.TryDeleteRegistryValue(false, @"Control Panel\Desktop", "WaitToKillAppTimeout");
+            Utilities.TryDeleteRegistryValue(false, @"Control Panel\Desktop", "LowLevelHooksTimeout");
+
+            Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoLowDiskSpaceChecks");
+            Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "LinkResolveIgnoreLinkInfo");
+            Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoResolveSearch");
+            Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoResolveTrack");
+            Utilities.TryDeleteRegistryValue(false, @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoInternetOpenWith");
+
             Registry.SetValue("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control", "WaitToKillServiceTimeout", "5000", RegistryValueKind.DWord);
         }
 
@@ -46,34 +44,37 @@ namespace TweakerOS.Tweaks.Performance
 
         public bool GetTweakIsApplied()
         {
-            // Проверяем, внесены ли изменения
             bool settingsChanged = false;
 
             // Проверяем настройки рабочего стола
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "AutoEndTasks", null) as string != "1")
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "AutoEndTasks", null) is int autoEndTasks && autoEndTasks == 1)
                 settingsChanged = true;
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "HungAppTimeout", null) as string != "1000")
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "HungAppTimeout", null) is int hungAppTimeout && hungAppTimeout == 1000)
                 settingsChanged = true;
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "WaitToKillAppTimeout", null) as string != "2000")
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "WaitToKillAppTimeout", null) is int waitToKillAppTimeout && waitToKillAppTimeout == 2000)
                 settingsChanged = true;
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "LowLevelHooksTimeout", null) as string != "1000")
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "LowLevelHooksTimeout", null) is int lowLevelHooksTimeout && lowLevelHooksTimeout == 1000)
                 settingsChanged = true;
 
             // Проверяем настройки проводника
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoLowDiskSpaceChecks", null) as string != "00000001")
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoLowDiskSpaceChecks", null) is int noLowDiskSpaceChecks && noLowDiskSpaceChecks == 1)
                 settingsChanged = true;
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "LinkResolveIgnoreLinkInfo", null) as string != "00000001")
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "LinkResolveIgnoreLinkInfo", null) is int linkResolveIgnoreLinkInfo && linkResolveIgnoreLinkInfo == 1)
                 settingsChanged = true;
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoResolveSearch", null) as string != "00000001")
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoResolveSearch", null) is int noResolveSearch && noResolveSearch == 1)
                 settingsChanged = true;
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoResolveTrack", null) as string != "00000001")
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoResolveTrack", null) is int noResolveTrack && noResolveTrack == 1)
                 settingsChanged = true;
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoInternetOpenWith", null) as string != "00000001")
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoInternetOpenWith", null) is int noInternetOpenWith && noInternetOpenWith == 1)
                 settingsChanged = true;
-            
+
+            // Проверяем настройку таймаута завершения служб
+            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control", "WaitToKillServiceTimeout", -1) is int waitToKillServiceTimeout && waitToKillServiceTimeout == 2000)
+                settingsChanged = true;
 
             return settingsChanged;
         }
+
 
         public bool RebootRequires => false;
     }

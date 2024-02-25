@@ -6,8 +6,14 @@
       xmlns:local="clr-namespace:TweakerOS.View.Pages"
       mc:Ignorable="d"
       Title="HomePage" Height="450" Width="800">
-    <Grid>
-        <Label>Home</Label>
+    <Border CornerRadius="5" Background="{DynamicResource SecondaryBackgroundColor}" Padding="0 0 0 10">
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+            <StackPanel>
+                <Label Style="{StaticResource InfoPagesLabelStyle}">Информация о системе</Label>
+                <Separator BorderThickness="10" BorderBrush="Black" Margin="10 0" />
+                
+            </StackPanel>
+        </ScrollViewer>
 
-    </Grid>
+    </Border>
 </Page>

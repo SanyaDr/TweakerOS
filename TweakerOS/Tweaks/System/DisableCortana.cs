@@ -10,17 +10,17 @@ public class DisableCortana : ITweak
 
     public bool GetTweakIsApplied()
     {
-        bool isTweakApplied = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings", "IsDeviceSearchHistoryEnabled", "-1") == "0" &&
-                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Search", "AllowCortana", "-1") == "0" &&
-                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Search", "DisableWebSearch", "-1") == "1" &&
-                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Search", "ConnectedSearchUseWeb", "-1") == "0" &&
-                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Search", "ConnectedSearchUseWebOverMeteredConnections", "-1") == "0" &&
-                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Search", "AllowCloudSearch", "-1") == "0" &&
-                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "HistoryViewEnabled", "-1") == "0" &&
-                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "DeviceHistoryEnabled", "-1") == "0" &&
-                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "AllowSearchToUseLocation", "-1") == "0" &&
-                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "BingSearchEnabled", "-1") == "0" &&
-                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "CortanaConsent", "-1") == "0";
+        bool isTweakApplied = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings", "IsDeviceSearchHistoryEnabled", -1) is int IsDeviceSearchHistoryEnabled && IsDeviceSearchHistoryEnabled == 0 &&
+                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Search", "AllowCortana", -1) is int AllowCortana && AllowCortana == 0 &&
+                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Search", "DisableWebSearch", -1) is int DisableWebSearch && DisableWebSearch == 1 &&
+                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Search", "ConnectedSearchUseWeb", -1) is int ConnectedSearchUseWeb && ConnectedSearchUseWeb == 0 &&
+                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Search", "ConnectedSearchUseWebOverMeteredConnections", -1) is int OverMeteredConnections && OverMeteredConnections == 0 &&
+                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Search", "AllowCloudSearch", -1) is int AllowCloudSearch && AllowCloudSearch == 0 &&
+                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "HistoryViewEnabled", -1) is int HistoryViewEnabled && HistoryViewEnabled == 0 &&
+                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "DeviceHistoryEnabled", -1) is int DeviceHistoryEnabled && DeviceHistoryEnabled == 0 &&
+                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "AllowSearchToUseLocation", -1) is int AllowSearchToUseLocation && AllowSearchToUseLocation == 0 &&
+                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "BingSearchEnabled", -1) is int BingSearchEnabled && BingSearchEnabled == 0 &&
+                              Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "CortanaConsent", -1) is int CortanaConsent && CortanaConsent == 0;
         return isTweakApplied;
     }
 
