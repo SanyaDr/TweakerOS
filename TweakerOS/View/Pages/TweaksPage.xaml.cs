@@ -143,7 +143,10 @@ public partial class TweaksPage : Page
         var butSender = (Button)sender;
         int ind = int.Parse(butSender.Name.Split("AboutTweakButton")[1]);
         ITweak tweakSender = _tweaks[ind];
-        MessageBoxCustomWindow ms = new(tweakSender.Description, "О твике: " + tweakSender.Name);
-        ms.ShowDialog();
+
+        MessageBox.Show(tweakSender.Description, "О твике:", 
+            MessageBoxButton.OK, MessageBoxImage.Information);
+        // MessageBoxCustomWindow ms = new(tweakSender.Description, "О твике: " + tweakSender.Name);
+        // ms.ShowDialog();
     }
 }

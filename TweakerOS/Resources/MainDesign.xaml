@@ -191,7 +191,11 @@
         </Setter>
     </Style>
 
-
-    <!-- TODO если окно в полном экране то закругление экрана убрать -->
-
+    <!-- <Label FontWeight="SemiBold" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center">About program </Label> -->
+    <Style x:Key="InfoPagesLabelStyle" TargetType="Label">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
 </ResourceDictionary>

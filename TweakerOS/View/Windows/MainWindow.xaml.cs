@@ -123,4 +123,9 @@ public partial class MainWindow : Window
         about.Show();
         e.Handled = true;
     }
+
+    private void HomePageCategoryClick(object sender, RoutedEventArgs e)
+    {
+        PagesNavigation.Navigate(new HomePage());
+    }
 }
