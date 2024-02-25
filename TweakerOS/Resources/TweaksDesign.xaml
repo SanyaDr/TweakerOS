@@ -32,7 +32,9 @@
     </Style>
     <Style x:Key="TweakDoubleButtonsStyle" TargetType="Button">
         <!-- <Setter Property="Margin" Value="10 5"/> -->
-        <Setter Property="Width" Value="50"/>
+        <Setter Property="MinWidth" Value="50"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         
         <Setter Property="Template">
             <Setter.Value>
@@ -40,9 +42,16 @@
                     <Border CornerRadius="4" BorderBrush="Black" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#f2f2f2"/>
+                            <Setter Property="BorderThickness" Value="2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        
     </Style>
 
 

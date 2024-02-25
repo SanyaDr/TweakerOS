@@ -44,22 +44,24 @@ public partial class TweaksPage : Page
             }
             catch (NotImplementedException e)
             {
+                main.Height += 10;
                 grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) });
                 StackPanel panel = new();
                 Grid.SetColumn(panel, 0);
-                panel.Orientation = Orientation.Horizontal;
+                panel.Orientation = Orientation.Vertical;
+                panel.VerticalAlignment = VerticalAlignment.Center;
 
                 Button bOn = new();
                 bOn.Style = (Style)FindResource("TweakDoubleButtonsStyle");
-                bOn.Content = "Вкл";
-                bOn.Margin = new Thickness(8, 5, 4, 5);
+                bOn.Content = "Применить";
+                bOn.Margin = new Thickness(5, 5, 5, 3);
                 bOn.Tag = tweak;
                 bOn.Click += TweakButtonOnClick;
 
                 Button bOff = new();
                 bOff.Style = (Style)FindResource("TweakDoubleButtonsStyle");
-                bOff.Content = "Выкл";
-                bOff.Margin = new Thickness(4, 5, 8, 5);
+                bOff.Content = "Восстановить";
+                bOff.Margin = new Thickness(5, 3, 5, 5);
                 bOff.Tag = tweak;
                 bOff.Click += TweakButtonOffClick;
 

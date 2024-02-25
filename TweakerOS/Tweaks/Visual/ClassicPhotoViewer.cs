@@ -170,7 +170,7 @@ public class ClassicPhotoViewer : ITweak
             RegistryValueKind.String);
         Registry.LocalMachine.DeleteSubKey(@"SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations",
             false);
-        Registry.ClassesRoot.DeleteSubKey(@"Applications\photoviewer.dll\shell\open", false);
+        Registry.ClassesRoot.DeleteSubKeyTree(@"Applications\photoviewer.dll\shell\open", false);
         Registry.ClassesRoot.DeleteSubKeyTree(@"PhotoViewer.FileAssoc.Bitmap", false);
         Registry.ClassesRoot.DeleteSubKeyTree(@"PhotoViewer.FileAssoc.JFIF", false);
         Registry.ClassesRoot.DeleteSubKeyTree(@"PhotoViewer.FileAssoc.Jpeg", false);

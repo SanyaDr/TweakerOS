@@ -8,7 +8,7 @@ public static class AllCategories
     {
         List<ICategory> categories =
         [
-            new HomePageCategory(),
+            // new HomePageCategory(),
             new ViewTweakCategory(),
             new PerformanceTweakCategory(),
             new SystemTweakCategory()
